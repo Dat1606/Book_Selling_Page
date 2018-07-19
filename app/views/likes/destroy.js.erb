@@ -1,0 +1,2 @@
+$("#book").html("<%= escape_javascript(render('books/like')) %>");
+$("#likes").html('<%= book.book_likes.count %>');

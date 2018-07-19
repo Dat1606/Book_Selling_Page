@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book_id: 1
+  user_id: 1
+  borrow_date: 2018-07-17 14:25:23
+  return_date: 2018-07-17 14:25:23
+  status: false
+
+two:
+  book_id: 1
+  user_id: 1
+  borrow_date: 2018-07-17 14:25:23
+  return_date: 2018-07-17 14:25:23
+  status: false

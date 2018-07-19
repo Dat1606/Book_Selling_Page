@@ -1,0 +1,49 @@
+<% if admin_user? %>
+  <%= render "shared/control_bar" %>
+<% end %>
+<div class="show_book col-md-9">
+ <% if logged_in? %>
+  <h2 class="category"><%=link_to ("Request " + @request.id.to_s ), request_path(request) %></h2>
+  <p>User name :<%= link_to @user.name, @user %></p>
+  <p><b>Borrow date: </b><%= I18n.l @request.borrow_date %></p>
+  <p><b>Return date: </b><%= I18n.l @request.return_date %></p>
+  <p><b>Status: </b><% if @request.status == 1 %>
+       <span><b>Pending</b></span>
+       <% elsif @request.status == 2 %>
+       <span><b style="color:green">Confirmed, not reiceived yet</b></span>
+       <% elsif @request.status == 3 %>
+       <span><b style="color:blue"> Received, not returned yet<b> </span>
+       <% elsif @request.status == 4 %>
+       <span><b style="color:red"> Rejected</b></span>
+       <% elsif @request.status == 5 %>
+       <span><b style="color:green"> Returned </b></span>
+       <% end %></p>
+  <%= render @book %>
+  <% if admin_user? && @request.status == 1 && @book.number > 0 %>
+    <%= form_for (@request)  do |f| %>
+      <%= f.hidden_field :status, value: 2 %>
+      <%= f.submit "Accept this request", class: "btn btn-primary" %>
+    <% end %>
+      <p></p>
+    <%= form_for (@request)  do |f| %>
+      <%= f.hidden_field :status, value: 4 %>
+      <%= f.submit "Reject this request", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+  <% end %>
+
+  <% if admin_user? && @request.status == 2 %>
+    <%= form_for (@request)  do |f| %>
+      <%= f.hidden_field :status, value: 3 %>
+      <%= f.submit "Confirm Reiceive", class: "btn btn-primary" %>
+    <% end %>
+    <% end %>
+
+    <% if admin_user? && @request.status == 3 %>
+    <%= form_for (@request)  do |f| %>
+      <%= f.hidden_field :status, value: 5 %>
+      <%= f.submit "Confirm Returned", class: "btn btn-primary" %>
+    <% end %>
+    <% end %>
+</div>
+

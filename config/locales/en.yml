@@ -1,0 +1,60 @@
+en:
+  base_title: "Thunder Library"
+  error_message: "The form contains"
+  sign_up: "Sign up"
+  user_not_found: "User not found"
+  log_in: "Log in"
+  invalid_login: "Invalid email or password"
+  user: "User"
+  profile: "Profile"
+  setting: "Settings"
+  about: "About"
+  remember_password: "Remember password"
+  new_user: "New user?"
+  tutorial: "Ruby on Rails Tutorial"
+  by: "by"
+  account: "Account"
+  log_out: "Log out"
+  profile_updated: "Profile updated"
+  user_deleted: "User deleted"
+  please_log_in: "Please log in."
+  are_you_sure: "Are you sure?"
+  delete: "Delete"
+  confirmation: "Confirmation"
+  save_change: "Save change"
+  all_users: "All users"
+  edit_user: "Edit user"
+  update_your_profile: "Update your profile"
+  thunder_blog: "Thunder Library"
+  about: "About"
+  home: "Home"
+  help: "Help"
+  greeting: "Welcome to Thunder Library."
+  greeting2: "Join us to borrow thousands of books for free!"
+  category_deleted: "Category deleted"
+  book_deleted: "Book deleted"
+
+  static_pages:
+    contact:
+      contact1: "Contact"
+      contactmsg: "Contact the Ruby on Rails Tutorial about the sample app at the"
+      contactpg: "contact page"
+
+    help:
+      help1: "Help"
+      add_help: "I am going to add some Help here"
+      find_me: "Wanna find me? "
+
+    home:
+      home: "Home"
+      sign_up_now: "Sign up now"
+      home_page: "This is the home page for the "
+      sample_application: "Sample Application. "
+
+  users:
+    new:
+      create_account: "Create account"
+
+  time:
+    format:
+      long: "%m.%d.%Y %p"

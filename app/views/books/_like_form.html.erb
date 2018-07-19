@@ -1,0 +1,7 @@
+<div id="like_for">
+  <% if current_user.like?(@book) %>
+     <%= render 'books/unlike' %>
+  <% else %>
+   <%= render 'books/like' %>
+  <% end %>
+  </div>

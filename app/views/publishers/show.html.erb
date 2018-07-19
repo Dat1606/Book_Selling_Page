@@ -1,0 +1,10 @@
+<% if admin_user? %>
+  <%= render "shared/control_bar" %>
+<% end %>
+<div class="show_book col-md-9">
+<h2><%= link_to @publisher.name, publisher_path %></h2>
+<% if @books.any? %>
+  <%= render @books %>
+  <%= paginate @books %>
+<% end %>
+</div>

@@ -1,0 +1,27 @@
+<% provide(:title, "Edit book") %>
+<% if admin_user? %>
+    <%= render "shared/control_bar" %>
+<% end %>
+ <div class="show_book col-md-8">
+<h1> Edit book </h1>
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for [@category, @book] do |f| %>
+     <%= render "shared/error_messages",  object: f.object %>
+     <%= f.hidden_field :user_id, value: current_user.id %>
+    <span class="picture">
+      <%= f.label :Upload_Picture %>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "form-control" %>
+    </span>
+     <%= f.label :name %>
+     <%= f.text_field :name, class: "form-control" %>
+    <%= f.label :Choose_Author %>
+    <%= f.collection_select :author_id, Author.order(:name),:id,:name, {},class: "form-control"  %>
+    <%= f.label :Choose_Publisher %>
+    <%= f.collection_select :publisher_id, Publisher.order(:name),:id,:name,  {}, class: "form-control"  %>
+      <%= f.label :Set_number %>
+    <%= f.text_field :number,placeholder: "Set book nunber...", class: "form-control"  %>
+
+  <%= f.submit "Save change", class: "btn btn-primary" %>
+<% end %>
+  </div>
+</div>

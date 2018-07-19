@@ -1,0 +1,8 @@
+<li id="comment">
+  <%= link_to gravatar_for(comment.user, size: 50), comment.user %>
+  <span class="user"><%= link_to comment.user.name, comment.user %></span>
+  <span class="content"><%= break_the_lines comment.content %></span>
+  <p> Posted in
+    <%= l comment.created_at, format: :long %>
+  </p>
+</li>

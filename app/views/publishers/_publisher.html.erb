@@ -1,0 +1,7 @@
+<li><b><%= link_to publisher.name, publisher %></b></li>
+<% if logged_in? %>
+  <% if admin_user? %>
+    <%= link_to t("delete"), publisher, method: :delete, data: {confirm: t("are_you_sure")} %>
+  <% end %>
+  <% end %>
+

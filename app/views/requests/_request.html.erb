@@ -1,0 +1,16 @@
+<li>
+ <% if logged_in? %>
+ <% if request.status == 1 %>
+  <p class="category" style="color:pink"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Pending)</p>
+  <% elsif request.status == 2 %>
+  <p class="category" style="color:#2ECC71"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Accepted)</p>
+  <% elsif request.status == 3 %>
+  <p class="category" style="color:blue"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Received)</p>
+  <% elsif request.status == 4 %>
+  <p class="category" style="color:red"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Rejected)</p>
+  <% elsif request.status == 5 %>
+  <p class="category" style="color:green"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Returned)</p>
+    <%= link_to t("delete"), request, method: :delete, data: {confirm: t("are_you_sure")} %>
+    <% end %>
+  <% end %>
+</li>

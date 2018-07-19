@@ -1,0 +1,27 @@
+<% if admin_user? %>
+<div>
+  <%= render "shared/control_bar" %>
+ </div>
+<div class="show_book col-md-8">
+<% else %>
+  <div class="category_left col-md-3">
+        <p></p>
+        <%= form_tag(category_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search books", class: 'form-control' %>
+          <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+        <% end %>
+      <% if @categories.any? %>
+      <ol class="micropos">
+        <%= render @categories %>
+      </ol>
+      <% end %>
+  </div>
+<% end %>
+<% if @books.any? %>
+<ol class="microposts">
+  <%= render @books %>
+</ol>
+  <%= paginate @books %>
+<% end %>
+</div>
+</div>

@@ -1,0 +1,8 @@
+<li><%= link_to author.name, author %>
+  <p></p>
+  <% if logged_in? %>
+  <% if admin_user? %>
+    <%= link_to t("delete"), author, method: :delete, data: {confirm: t("are_you_sure")} %>
+  <% end %>
+  <% end %>
+</li>

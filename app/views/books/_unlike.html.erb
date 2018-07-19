@@ -1,0 +1,3 @@
+  <%= form_for(current_user.active_likes.find_by(book_id: book.id), html: { method: :delete }) do |f| %>
+<%= f.submit "Unlike", class: "btn" %>
+<% end %>

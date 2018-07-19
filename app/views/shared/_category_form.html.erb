@@ -1,0 +1,8 @@
+<%= form_for @categoryy do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.text_field :name, placeholder: "Set category name...", class: 'form-control' %>
+  </div>
+  <%= f.submit "Create category", class: "btn btn-primary" %>
+<% end %>
