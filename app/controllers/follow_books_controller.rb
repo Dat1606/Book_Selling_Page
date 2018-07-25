@@ -1,4 +1,5 @@
 class FollowBooksController < ApplicationController
+  before_action :logged_in_user
    def create
     book_id = Book.find_by id: params[:like][:book_id]
     current_user.like book_id

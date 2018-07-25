@@ -1,5 +1,6 @@
 class PublishersController < ApplicationController
    before_action :load_request
+   before_action :logged_in_user
 
   def show
     @publisher = Publisher.find_by id: params[:id]

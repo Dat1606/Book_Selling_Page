@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <% if admin_user? %>
+    <%= render "shared/control_bar" %>
+    <% end %>
+    <% end %>
+  <div class="show_book col-md-9">
+<% if @rejected_requests.any? %>
+<ol><%= render @rejected_requests %></ol>
+<% end %>
+<% if @rejected_requests.blank? %>
+  <h1> There are currently no rejected requests .</h1>
+  <% end %>
+</div>

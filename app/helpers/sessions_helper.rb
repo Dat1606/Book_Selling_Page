@@ -62,6 +62,7 @@ module SessionsHelper
   end
 
   def load_request
+    @request = Request.new
     @requests = Request.all
     @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
   end

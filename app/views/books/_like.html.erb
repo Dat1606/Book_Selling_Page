@@ -1,5 +1,10 @@
- <%= form_for(current_user.active_likes.build, method: :post) do |f| %>
+
+<div class="col-md-3" id="create_like">
+  <%= form_for(current_user.active_likes.build, remote: true) do |f| %>
+  <%= f.hidden_field :book_id, value: book.id %>
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :book_id, value: @book.id %>
-  <%= f.submit "Like", class: "btn btn-primary" %>
+  <%= button_tag(type: "submit", class: "main-btn icon-btn") do %>
+    <span><i class="fa fa-heart-o"></i></span>
+  <% end %>
 <% end %>
+</div>

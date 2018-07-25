@@ -1,8 +1,8 @@
 class BooksController < ApplicationController
-  before_action :logged_in_user, :admin_user, only: [:create, :destroy]
+  before_action :admin_user, only: [:create, :destroy]
   before_action :load_show, only: :show
-   before_action :load_request
-
+  before_action :load_request
+  before_action :logged_in_user
 
   def index
     @books = Book.order(:name).page params[:page]

@@ -1,3 +1,7 @@
-  <%= form_for(current_user.active_likes.find_by(book_id: book.id), html: { method: :delete }) do |f| %>
-<%= f.submit "Unlike", class: "btn" %>
-<% end %>
+<div class="col-md-3" id="delete_like" style="margin-right: 2px;">
+  <%=form_for(current_user.active_likes.find_by(book_id: book.id),html: { method: :delete }, remote: true) do |f| %>
+    <%= button_tag(type: "submit", class: "main-btn icon-btn") do %>
+    <span><i class="fa fa-heart" style="color:red"></i></span>
+    <% end %>
+  <% end %>
+</div>

@@ -2,10 +2,6 @@
   <%= render "shared/control_bar" %>
 <% end %>
 <div class="show_book col-md-9">
-<%= form_tag(categories_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search categories", class: 'search1 form-control' %>
-  <%= submit_tag "Search", :name => nil, class: "search2 btn btn-primary" %>
-<% end %>
 <h2>Categories</h2>
    <ol class="micropos">
   <%= form_for @category do |f| %>

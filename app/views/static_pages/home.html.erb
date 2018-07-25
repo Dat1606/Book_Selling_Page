@@ -1,36 +1,35 @@
 <% if logged_in? %>
-  <% if admin_user? %>
-    <%= render "shared/control_bar" %>
-  <% else %>
-    <div class="category_left col-md-3">
-        <p></p>
-        <%= form_tag(root_path, :method => "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Search books", class: 'form-control', id: "filter-autocomplete-search" %>
-          <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
-        <% end %>
-        <h3>Categories</h3>
-      <% if @categories.any? %>
-      <ol class="micropos">
-        <%= render @categories %>
-      </ol>
+<%= render "shared/control_bar" %>
+<div class="show_book col-md-9">
+<div class="col-md-12">
+  <div class="section-title">
+    <h2 class="title">Featured books</h2>
+    <div class="pull-right">
+      <div class="product-slick-dots-1 custom-dots"></div>
+    </div>
   </div>
+</div>
+<div class="book_content">
+  <% if @books.any? %>
+    <%= render @books.limit(4) %>
   <% end %>
-<% end %>
-<% if admin_user? %>
-  <div class="show_book col-md-9">
-    <%= form_tag(category_books_url(1),  :method => "get", id: "search-form", html: { multipart: true }) do |f| %>
-     <%= submit_tag "Search", :name => nil, class: "search2 btn btn-primary" %>
-   <%= text_field_tag :search, params[:search], placeholder: "Search books...", class: "search1" %>
-      <% end %>
-      <% end %>
-<% if @books.any? %>
-<ol class="book">
-  <%= render @books %>
-</ol>
-  <%= paginate @books %>
-<% end %>
 </div>
+
+  <h3></h3>
+<div class="col-md-12">
+  <div class="section-title">
+    <h2 class="title">Picked for you</h2>
+    <div class="pull-right">
+      <div class="product-slick-dots-1 custom-dots"></div>
+    </div>
+  </div>
 </div>
+<div class="book_content">
+  <% if @book2 %>
+    <%= render @book2 %>
+  <% end %>
+</div>
+
 <% else %>
 <div class="content">
   <div class="content-left col-md-4">
@@ -65,4 +64,7 @@
     </div>
   </div>
 </div>
+</div>
 <% end %>
+
+

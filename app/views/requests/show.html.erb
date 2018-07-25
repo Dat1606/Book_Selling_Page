@@ -4,7 +4,10 @@
 <div class="show_book col-md-9">
  <% if logged_in? %>
   <h2 class="category"><%=link_to ("Request " + @request.id.to_s ), request_path(request) %></h2>
-  <p>User name :<%= link_to @user.name, @user %></p>
+  <%= render @book %>
+  <div class="show_book_right">
+    <p>User name :<%= link_to @user.name, @user %></p>
+    <p>Description: <%= @book.description %></p>
   <p><b>Borrow date: </b><%= I18n.l @request.borrow_date %></p>
   <p><b>Return date: </b><%= I18n.l @request.return_date %></p>
   <p><b>Status: </b><% if @request.status == 1 %>
@@ -12,13 +15,12 @@
        <% elsif @request.status == 2 %>
        <span><b style="color:green">Confirmed, not reiceived yet</b></span>
        <% elsif @request.status == 3 %>
-       <span><b style="color:blue"> Received, not returned yet<b> </span>
+       <span><b style="color:blue"> Received, not returned yet</b> </span>
        <% elsif @request.status == 4 %>
        <span><b style="color:red"> Rejected</b></span>
        <% elsif @request.status == 5 %>
        <span><b style="color:green"> Returned </b></span>
        <% end %></p>
-  <%= render @book %>
   <% if admin_user? && @request.status == 1 && @book.number > 0 %>
     <%= form_for (@request)  do |f| %>
       <%= f.hidden_field :status, value: 2 %>
@@ -45,5 +47,6 @@
       <%= f.submit "Confirm Returned", class: "btn btn-primary" %>
     <% end %>
     <% end %>
+  </div>
 </div>
 

@@ -12,7 +12,15 @@ Rails.application.routes.draw do
   end
   resources :authors
   resources :publishers
-  resources :requests
+  resources :requests do
+    collection do
+      get :incoming_requests
+      get :confirmed_requests
+      get :received_requests
+      get :returned_requests
+      get :rejected_requests
+    end
+  end
   resources :likes
   resources :relationships, only: [:create, :destroy]
   resources :searches

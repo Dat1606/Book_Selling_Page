@@ -1,12 +1,66 @@
-<div class="list-group col-md-3">
-<ul class="list-group-item list-group-item-action active">Managerment</ul>
-<a href="/requests" class="list-group-item list-group-item-action">Request managerment <span class="badge badge-primary badge-pill"><%= @incoming_requests.count %> Pending</span></a>
-<%= link_to "Show  users", users_path, class: "list-group-item list-group-item-action" %>
-<%= link_to "Create a new user", new_user_path, class: "list-group-item list-group-item-action" %>
-<%= link_to "Create new book", new_category_book_url(1), class: "list-group-item list-group-item-action" %>
-<%= link_to "Show  books", root_path, class: "list-group-item list-group-item-action " %>
- <%= link_to "Show categories", categories_path, class: "list-group-item list-group-item-action"%>
-<%= link_to "Show  publishers", publishers_path, class: "list-group-item list-group-item-action" %>
-<%= link_to "Show  Authors", authors_path, class: "list-group-item list-group-item-action" %>
+<div class="nav-side-menu">
+    <div class="brand" style="height: 63px;"><a href='<%= root_path %>'><img  style="width:100px; height:70px;" src="assets/logo.png"></img></a></div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+                <li>
+                  <a href="#">
+                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                  </a>
+                </li>
+
+                <li  data-toggle="collapse" data-target="#products" class="collapsed">
+                  <a><i class="fa fa-calendar-check-o fa-lg"></i> Request management<span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <li class="active"><%= link_to "Show all request", requests_path %></li>
+                    <li><%= link_to "Incoming Requests", incoming_requests_requests_path %> <span class="badge badge-primary badge-pill"><%= @incoming_requests.count %> </span></li>
+                    <li><%= link_to "Confirmed Requests", confirmed_requests_requests_path %></li>
+                    <li><%= link_to "Received Book Requests", received_requests_requests_path %></li>
+                    <li><%= link_to "Returned Book Requests", returned_requests_requests_path %></li>
+                    <li><%= link_to "Rejected Requests",  rejected_requests_requests_path %></li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                  <a><i class="fa fa-globe fa-lg"></i> Categories <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                  <li><%= link_to (Category.find_by id: 1).name, category_path(1) %></li>
+                  <li><%= link_to (Category.find_by id: 2).name, category_path(2) %></li>
+                  <li><%= link_to (Category.find_by id: 3).name, category_path(3) %></li>
+                  <li><%= link_to (Category.find_by id: 4).name, category_path(4) %></li>
+                  <li><%= link_to (Category.find_by id: 5).name, category_path(5) %></li>
+                  <li><%= link_to (Category.find_by id: 6).name, category_path(6) %></li>
+                  <li><%= link_to (Category.find_by id: 7).name, category_path(7) %></li>
+                  <li><%= link_to (Category.find_by id: 8).name, category_path(8) %></li>
+                  <li><%= link_to (Category.find_by id: 9).name, category_path(9) %></li>
+                  <li><%= link_to (Category.find_by id: 10).name, category_path(10) %></li>
+                </ul>
+
+
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                  <a><i class="fa fa-address-card fa-lg"></i> Authors <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="new">
+                   <li><%= link_to (Author.find_by id: 1).name, author_path(1) %></li>
+                   <li><%= link_to (Author.find_by id: 2).name, author_path(2) %></li>
+                   <li><%= link_to (Author.find_by id: 3).name, author_path(3) %></li>
+                   <li><%= link_to (Author.find_by id: 4).name, author_path(4) %></li>
+                   <li><%= link_to (Author.find_by id: 5).name, author_path(5) %></li>
+                </ul>
+
+                 <li><a>
+                  <i class="fa fa-user fa-lg"></i><%= link_to "Profile", user_path(current_user) %></a>
+                  </li>
+
+                 <li>
+                  <a>
+                  <i class="fa fa-users fa-lg"></i><%= link_to "Users", users_path %>
+                  </a>
+                </li>
+            </ul>
+     </div>
 </div>

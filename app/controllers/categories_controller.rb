@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
-  before_action :logged_in_user, :admin_user, only: [:create, :destroy]
-   before_action :load_request
+  before_action :logged_in_user
+  before_action :admin_user, only: [:create, :destroy]
+  before_action :load_request
 
   def index
     @categories = Category.order(:name).page params[:page]
@@ -26,7 +27,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-     @category = admin_user.categories.build(category_params)
+    @category = admin_user.categories.build(category_params)
     if @category.save
       flash[:success] = "Category created!"
       redirect_to categories_url

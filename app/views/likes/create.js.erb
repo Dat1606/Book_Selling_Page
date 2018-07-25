@@ -1,3 +1,1 @@
-$("#like_form").html("<%= escape_javascript(render "books/unlike")%>");
-$("#like_count").html('<%= pluralize(book.book_likes.count, "like") %>');
-
+$("#like_form<%= @book.id %>").html("<%= j render 'books/unlike', book: @book %>");

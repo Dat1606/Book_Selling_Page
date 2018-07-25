@@ -5,13 +5,14 @@ class StaticPagesController < ApplicationController
     if logged_in?
       @feed_items = current_user.feed.order(:name).page params[:page]
       @categoryy = Category.new
-      @book   = Book.new
+      #@book   = Book.new
       @like = Like.new
+      @request = Request.new
     end
     if params[:search]
       @books = Book.search(params[:search]).order(:name).page params[:page]
     else
-      @books = Book.order(:name).page params[:page]
+      @books = Book.order("name DESC")
     end
     @requests = Request.all
     @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
@@ -21,18 +22,12 @@ class StaticPagesController < ApplicationController
 
   def contact; end
 
-   def search
-    term = params[:term] || nil
-    products = []
-    products = Book.where('name LIKE ?', "%#{term}%") if term
-    render json: products
-  end
-
   private
 
   def find_book
-    @books = Book.order(:name).page params[:page]
-    book = Book.find_by id: params[:id]
+    @books = Book.order("name DESC")
+    @book2 = Book.last(4)
+    @book = Book.find_by id: params[:id]
   end
 
   def find_category

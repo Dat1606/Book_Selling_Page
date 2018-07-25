@@ -34,7 +34,8 @@ end
 
 books = []
 50.times do |n|
-  Book.create(name: Faker::Name.name, category_id: rand(1..4), number: rand(10..27),  user_id: 1, author_id: rand(1..5) , publisher_id: rand(1..5),
+  Book.create(name: Faker::Name.name, category_id: rand(1..4), number: rand(10..27),  user_id: 1, author_id: rand(1..5) ,
+  description: Faker::Lorem.sentence(4), publisher_id: rand(1..5),
     picture: File.open(File.join(Rails.root,"app/assets/images/#{rand(1..5)}.jpg")) )
 end
 

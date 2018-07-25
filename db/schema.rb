@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_07_20_021240) do
     t.string "name"
     t.integer "number", default: 1
     t.integer "user_id"
+    t.text "description"
     t.integer "category_id"
     t.integer "publisher_id"
     t.integer "author_id"

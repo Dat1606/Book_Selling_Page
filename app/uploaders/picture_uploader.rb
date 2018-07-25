@@ -1,6 +1,6 @@
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  process resize_to_limit: [200, 150]
+  process resize_to_limit: [500, 800]
 
   storage :file
   # storage :fog

@@ -1,2 +1,1 @@
-$("#book").html("<%= escape_javascript(render('books/like')) %>");
-$("#likes").html('<%= book.book_likes.count %>');
+$("#like_form<%= @book.id %>").html("<%= j render('books/like', book: @book) %>");

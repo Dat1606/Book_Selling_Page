@@ -1,10 +1,15 @@
 <% if logged_in? %>
-<header class="navbar navbar-light" style="background-color: #563d7c;margin-bottom: 0px;">
+<header class="navbar navbar-light" style="background-color:#30323A ;margin-bottom: 0px;">
   <div class="container">
     <%= link_to "Thunder.", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if admin_user? %>
+         <li><%= form_tag(users_path,  :method => "get", id: "search-form", html: { multipart: true }) do |f| %>
+     <%= submit_tag "Search", :name => nil, class: "search2 btn btn-primary" %>
+   <%= text_field_tag :search, params[:search], placeholder: "Search user...", class: "search1" %>
+
+      <% end %></li>
         <% else %>
         <li><%= link_to "All books", root_path %></li>
         <li><%= link_to "My requests", requests_path %></li>
@@ -14,7 +19,7 @@
           <li><%= link_to "Users", users_path %></li>
         <% end %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">

@@ -4,18 +4,16 @@ class RequestsController < ApplicationController
    before_action :load_request
 
   def create
-    @request = Request.new()
+    @request = Request.new(request_params)
     @request.book_id = @book.id
     @request.user_id = current_user.id
-    @request.borrow_date = convert_borrow_date
-    @request.return_date = convert_return_date
     @request.status = 1
     if @request.save
       flash[:success] = "Request created!"
       redirect_to root_url
     else
-      @request.errors.full_messages
-       redirect_back(fallback_location: root_path)
+     flash[:danger] = @request.errors.full_messages
+     redirect_back(fallback_location: root_path)
     end
   end
 
@@ -54,12 +52,37 @@ class RequestsController < ApplicationController
       if admin_user?
         @requests = Request.all
       end
-      @returned_requests =  (@requests.where(status: 5 )).order(:id).page params[:page]
       @received_requests =  (@requests.where(status: 3 )).order(:id).page params[:page]
       @confirmed_requests = (@requests.where(status: 2 )).order(:id).page params[:page]
       @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
+      @returned_requests =  (@requests.where(status: 5 )).order(:id).page params[:page]
       @rejected_requests = @requests.where(status: 4).order(:id).page params[:page]
     end
+  end
+
+  def incoming_requests
+    @requests = Request.all
+    @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
+  end
+
+  def confirmed_requests
+    @requests = Request.all
+    @confirmed_requests = (@requests.where(status: 2 )).order(:id).page params[:page]
+  end
+
+  def received_requests
+    @requests = Request.all
+    @received_requests =  (@requests.where(status: 3 )).order(:id).page params[:page]
+  end
+
+  def returned_requests
+    @requests = Request.all
+    @returned_requests =  (@requests.where(status: 5 )).order(:id).page params[:page]
+  end
+
+  def rejected_requests
+    @requests = Request.all
+    @rejected_requests = @requests.where(status: 4).order(:id).page params[:page]
   end
 
   def destroy

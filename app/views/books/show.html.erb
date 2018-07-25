@@ -1,34 +1,13 @@
 <% if admin_user? %>
   <%= render "shared/control_bar" %>
 <% end %>
+  </div>
+
 <div class="show_book col-md-9">
-  <p class="user"><b><%= link_to @book.name, category_book_path(@category, @book) %></b></p>
-  <%= image_tag @book.picture.url if @book.picture? %>
-  <p>Author: <%= link_to @author.name, author_path(@book.author_id) %></p>
-  <p>Publisher: <%= link_to @publisher.name, publisher_path(@book.publisher_id) %></p>
-    <span><span id="like_count"> <%= @book.book_likes.count  %></span><i class="fa fa-heart" style="color: red"></i></span>
-    <% if admin_user? %>
-    <%= link_to "Edit", edit_category_book_path(@category, @book) %>
-    <%= link_to t("delete"), category_book_path(@book.category, @book), method: :delete, data: {confirm: t("are_you_sure")} %>
-  <% end %>
-    <% if @book.number && @book.number > 0  %>
-    <p><%= @book.number %> left<p>
-      <% else %>
-      <p style="color:red">Out of service</p>
-      <% end %>
-    <h3>Comments:</h3>
-  <% if @comments.any? %>
-      <%= render @comments %>
-  <% end %>
-  <% if logged_in? %>
-  <%= render "shared/comment_form" %>
-  <% end %>
-  <% unless admin_user?  %>
-  <% if @book.number && @book.number > 0 %>
-<%= render 'shared/request_form', request: @request if logged_in? %>
-  <% end %>
-  <% end %>
-  <% if @confirmed_requests.any? %>
-  <% render @confirmed_requests %>
-  <% end %>
+ <div class="category_left col-md-3">
+        <p></p>
+        <%= form_tag(root_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search books", class: 'form-control', id: "filter-autocomplete-search" %>
+          <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+       <% end %>
 </div>

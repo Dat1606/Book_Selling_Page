@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <% if admin_user? %>
+    <%= render "shared/control_bar" %>
+    <% end %>
+    <% end %>
+  <div class="show_book col-md-9">
+<% if @incoming_requests.any? %>
+<ol class="list-request"><%= render @incoming_requests %></ol>
+<% end %>
+<% if @incoming_requests.blank? %>
+  <h1> There are currently no incoming requests.</h1>
+  <% end %>
+</div>

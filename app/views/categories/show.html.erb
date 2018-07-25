@@ -2,7 +2,7 @@
 <div>
   <%= render "shared/control_bar" %>
  </div>
-<div class="show_book col-md-8">
+<div class="show_book col-md-9">
 <% else %>
   <div class="category_left col-md-3">
         <p></p>
@@ -22,6 +22,8 @@
   <%= render @books %>
 </ol>
   <%= paginate @books %>
+  <% else %>
+  <h4>There are no books in this category</h4>
 <% end %>
 </div>
 </div>
