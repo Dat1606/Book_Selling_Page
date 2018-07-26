@@ -33,6 +33,7 @@ class RequestsController < ApplicationController
       flash[:info] = "OK"
     elsif params[:request].keys.first == "status" && params[:request].values.first == "4"
      @request.update_attribute(:status, 4)
+      @book.update_attribute(:number, (@book.number+=1))
       flash[:info] = "OK"
     elsif params[:request].keys.first == "status" && params[:request].values.first == "3"
       @request.update_attribute(:status, 3)
@@ -61,27 +62,42 @@ class RequestsController < ApplicationController
   end
 
   def incoming_requests
-    @requests = Request.all
+    @requests = current_user.find_requests
+      if admin_user?
+        @requests = Request.all
+      end
     @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
   end
 
   def confirmed_requests
-    @requests = Request.all
+    @requests = current_user.find_requests
+      if admin_user?
+        @requests = Request.all
+      end
     @confirmed_requests = (@requests.where(status: 2 )).order(:id).page params[:page]
   end
 
   def received_requests
-    @requests = Request.all
+    @requests = current_user.find_requests
+      if admin_user?
+        @requests = Request.all
+      end
     @received_requests =  (@requests.where(status: 3 )).order(:id).page params[:page]
   end
 
   def returned_requests
-    @requests = Request.all
+    @requests = current_user.find_requests
+      if admin_user?
+        @requests = Request.all
+      end
     @returned_requests =  (@requests.where(status: 5 )).order(:id).page params[:page]
   end
 
   def rejected_requests
-    @requests = Request.all
+   @requests = current_user.find_requests
+      if admin_user?
+        @requests = Request.all
+      end
     @rejected_requests = @requests.where(status: 4).order(:id).page params[:page]
   end
 

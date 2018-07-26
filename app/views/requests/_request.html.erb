@@ -1,16 +1,20 @@
-<li>
+<tr>
  <% if logged_in? %>
  <% if request.status == 1 %>
-  <p class="category" style="color:pink"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Pending)</p>
+  <td class="category" style="color:pink"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Pending)</td>
   <% elsif request.status == 2 %>
-  <p class="category" style="color:#2ECC71"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Accepted)</p>
+  <td class="category" style="color:#2ECC71"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Accepted)</td>
   <% elsif request.status == 3 %>
-  <p class="category" style="color:blue"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Received)</p>
+  <td class="category" style="color:blue"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Received)</td>
   <% elsif request.status == 4 %>
-  <p class="category" style="color:red"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Rejected)</p>
+  <td class="category" style="color:red"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Rejected)</td>
   <% elsif request.status == 5 %>
-  <p class="category" style="color:green"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Returned)</p>
+  <td class="category" style="color:green"><%=link_to ("Request " + request.id.to_s ), request_path(request.id) %> (Returned)</td>
     <%= link_to t("delete"), request, method: :delete, data: {confirm: t("are_you_sure")} %>
     <% end %>
+    <td ><%= link_to request.user.name, user_path(request.user) %></td>
+    <td><%= link_to request.book.name, category_book_path(request.book.category_id, request.book) %></td>
+    <td><%= l request.borrow_date %></td>
+    <td><%= l request.return_date %></td>
   <% end %>
-</li>
+</tr>

@@ -4,7 +4,7 @@ class PublishersController < ApplicationController
 
   def show
     @publisher = Publisher.find_by id: params[:id]
-    @books = Book.where publisher_id: params[:id]
+    @books = Book.where(publisher_id: params[:id]).order(:name).page params[:page]
   end
 
   def index

@@ -1,8 +1,4 @@
-<% if admin_user? %>
-  <%= render "shared/control_bar" %>
-<% end %>
-<div class="show_book col-md-9">
-  <ul class="users">
+<ul class="users">
     <h3>Publishers: </h3>
     <%= form_for @publisher do |f| %>
   <%= f.text_field :name,  placeholder: "Create publisher", class: 'search1 form-control' %>
@@ -11,5 +7,5 @@
     <% if @publishers.any? %>
       <ol><%= render @publishers %></ol>
     <% end %>
-  </ul>
-</div>
+</ul>
+

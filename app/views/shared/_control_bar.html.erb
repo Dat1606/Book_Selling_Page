@@ -1,66 +1,69 @@
 <div class="nav-side-menu">
-    <div class="brand" style="height: 63px;"><a href='<%= root_path %>'><img  style="width:100px; height:70px;" src="assets/logo.png"></img></a></div>
+    <div class="brand" style="height: 52px;"><%= link_to image_tag("logo.png", :class => "img_preview"), root_path %></div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
         <div class="menu-list">
 
             <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                  <a href="#">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                  </a>
-                </li>
-
-                <li  data-toggle="collapse" data-target="#products" class="collapsed">
-                  <a><i class="fa fa-calendar-check-o fa-lg"></i> Request management<span class="arrow"></span></a>
-                </li>
+              <% if admin_user? %>
+                <a href="<%= new_category_book_path(1) %>" style="color:white"><li><i class="fa fa-plus"></i> Create a new book </li></a>
+                <% end %>
+                 <a style="color:white"><li  data-toggle="collapse" data-target="#products" class="collapsed">
+                 <i class="fa fa-calendar-check-o fa-lg"></i> Request management<span class="arrow"></span>
+                </li></a>
                 <ul class="sub-menu collapse" id="products">
-                    <li class="active"><%= link_to "Show all request", requests_path %></li>
-                    <li><%= link_to "Incoming Requests", incoming_requests_requests_path %> <span class="badge badge-primary badge-pill"><%= @incoming_requests.count %> </span></li>
-                    <li><%= link_to "Confirmed Requests", confirmed_requests_requests_path %></li>
-                    <li><%= link_to "Received Book Requests", received_requests_requests_path %></li>
-                    <li><%= link_to "Returned Book Requests", returned_requests_requests_path %></li>
-                    <li><%= link_to "Rejected Requests",  rejected_requests_requests_path %></li>
+                    <a href="<%=requests_path %>" style="color:white"><li class="active"> Show all request</li></a>
+                    <% if admin_user? %>
+                    <a href="<%= incoming_requests_requests_path  %>" style="color:white"><li> Incoming Requests <span class="badge badge-primary badge-pill"><%= @incoming_requests.count %> </span></li></a>
+                    <% else %>
+                     <a href="<%= incoming_requests_requests_path %>" style="color:white"><li> Pedding Requests <span class="badge badge-primary badge-pill"><%= @incoming_requests.count %> </span></li></a>
+                     <% end %>
+                    <a href="<%= confirmed_requests_requests_path %>" style="color:white"><li> Confirmed Requests</li></a>
+                    <a href="<%= received_requests_requests_path %>" style="color:white"><li> Received Book Requests</li></a>
+                    <a href="<%= returned_requests_requests_path%>" style="color:white"><li> Returned Book Requests</li></a>
+                    <a href="<%= rejected_requests_requests_path %>" style="color:white"> <li> Rejected Requests</li></a>
                 </ul>
 
-
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a><i class="fa fa-globe fa-lg"></i> Categories <span class="arrow"></span></a>
-                </li>
+                <a href="<%= category_books_path(1) %>" style="color:white"><li><i class="fa fa-book"></i> All books</li></a>
+                <a style="color:white"><li data-toggle="collapse" data-target="#service" class="collapsed">
+                  <i class="fa fa-globe fa-lg"></i> Categories <span class="arrow"></span>
+                </li></a>
                 <ul class="sub-menu collapse" id="service">
-                  <li><%= link_to (Category.find_by id: 1).name, category_path(1) %></li>
-                  <li><%= link_to (Category.find_by id: 2).name, category_path(2) %></li>
-                  <li><%= link_to (Category.find_by id: 3).name, category_path(3) %></li>
-                  <li><%= link_to (Category.find_by id: 4).name, category_path(4) %></li>
-                  <li><%= link_to (Category.find_by id: 5).name, category_path(5) %></li>
-                  <li><%= link_to (Category.find_by id: 6).name, category_path(6) %></li>
-                  <li><%= link_to (Category.find_by id: 7).name, category_path(7) %></li>
-                  <li><%= link_to (Category.find_by id: 8).name, category_path(8) %></li>
-                  <li><%= link_to (Category.find_by id: 9).name, category_path(9) %></li>
-                  <li><%= link_to (Category.find_by id: 10).name, category_path(10) %></li>
+                   <a href="<%= categories_path %>" style="color:white"><li>All categories</li></a>
+                  <a href="<%= category_path(1) %>" style="color:white"><li><%=  (Category.find_by id: 1).name %></li></a>
+                  <a href="<%= category_path(2) %>" style="color:white"><li><%=  (Category.find_by id: 2).name %></li></a>
+                  <a href="<%= category_path(3) %>" style="color:white"><li><%=  (Category.find_by id: 3).name %></li></a>
+                  <a href="<%= category_path(4) %>" style="color:white"><li><%=  (Category.find_by id: 4).name %></li></a>
+                  <a href="<%= category_path(5) %>" style="color:white"><li><%=  (Category.find_by id: 5).name %></li></a>
+                  <a href="<%= category_path(5) %>" style="color:white"><li><%=  (Category.find_by id: 5).name %></li></a>
+                  <a href="<%= category_path(6) %>"style="color:white" ><li><%=  (Category.find_by id: 6).name %></li></a>
+                  <a href="<%= category_path(7) %>" style="color:white"><li><%=  (Category.find_by id: 7).name %></li></a>
+                  <a href="<%= category_path(8) %>" style="color:white"><li><%=  (Category.find_by id: 8).name %></li></a>
+                  <a href="<%= category_path(9) %>" style="color:white"><li><%=  (Category.find_by id: 9).name %></li></a>
+                  <a href="<%= category_path(10) %>" style="color:white"><li><%=  (Category.find_by id: 10).name %></li></a>
                 </ul>
 
 
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a><i class="fa fa-address-card fa-lg"></i> Authors <span class="arrow"></span></a>
-                </li>
+                <a style="color:white"><li data-toggle="collapse" data-target="#new" class="collapsed">
+                  <i class="fa fa-address-card fa-lg"></i> Authors <span class="arrow"></span>
+                </li></a>
                 <ul class="sub-menu collapse" id="new">
-                   <li><%= link_to (Author.find_by id: 1).name, author_path(1) %></li>
-                   <li><%= link_to (Author.find_by id: 2).name, author_path(2) %></li>
-                   <li><%= link_to (Author.find_by id: 3).name, author_path(3) %></li>
-                   <li><%= link_to (Author.find_by id: 4).name, author_path(4) %></li>
-                   <li><%= link_to (Author.find_by id: 5).name, author_path(5) %></li>
+                  <a href= "<%= authors_path %>" style="color:white"><li> All authors</li>
+                   <a href="<%= author_path(1) %>" style="color:white"> <li><%=(Author.find_by id: 1).name %></li></a>
+                   <a href="<%= author_path(2) %>" style="color:white"> <li><%=(Author.find_by id: 2).name %></li></a>
+                   <a href="<%= author_path(3) %>" style="color:white"> <li><%=(Author.find_by id: 3).name %></li></a>
+                   <a href="<%= author_path(4) %>" style="color:white"> <li><%=(Author.find_by id: 4).name %></li></a>
+                   <a href="<%= author_path(5) %>" style="color:white"> <li><%=(Author.find_by id: 5).name %></li></a>
                 </ul>
 
-                 <li><a>
-                  <i class="fa fa-user fa-lg"></i><%= link_to "Profile", user_path(current_user) %></a>
-                  </li>
+                 <a href="<%= user_path(current_user) %>" style="color:white"><li>
+                  <i class="fa fa-user fa-lg"></i> Profile</li></a>
 
-                 <li>
-                  <a>
-                  <i class="fa fa-users fa-lg"></i><%= link_to "Users", users_path %>
-                  </a>
-                </li>
+                 <a href="<%= users_path %>" style="color:white"><li>
+                  <i class="fa fa-users fa-lg"></i> Users</li></a>
+                <% if admin_user? %>
+                <a href="<%= signup_path %>" style="color:white"><li><i class="fa fa-plus"></i> Create a new user</li></a>
+                <% end %>
             </ul>
      </div>
 </div>

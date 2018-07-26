@@ -1,72 +1,16 @@
-<% if logged_in? %>
-  <% if admin_user? %>
-    <%= render "shared/control_bar" %>
-  <div class="show_book col-md-9">
-    <div class="incoming col-md-4">
-      <h3><%= link_to "Incoming Requests", "#" %> <h3>
-      <% if @incoming_requests.any? %>
-        <ol><%= render @incoming_requests %></ol>
-        <%= paginate @incoming_requests %>
-        <% end %>
-    </div>
-    <div class = "confirmed col-md-4">
-      <h3> Approved Requests </h3>
-      <% if @confirmed_requests.any? %>
-        <ol><%= render @confirmed_requests %></0l>
-        <%= paginate @confirmed_requests %>
-      <% end %>
+<h2>All Requests</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-md-2">Request name </th>
+        <th class="col-md-2">User name</th>
+        <th class="col-md-2">Book name</th>
+        <th class="col-md-2">Borrow date</th>
+        <th class="col-md-2">Return date</th>
+      </tr>
+    </thead>
 
-      <% if @received_requests.any? %>
-      <%= render @received_requests %>
-        <%= paginate @received_requests %>
-      <% end %>
-
-      <% if @returned_requests.any? %>
-      <%= render @returned_requests %>
-        <%= paginate @returned_requests %>
-      <% end %>
-    </div>
-    <div class = "rejected col-md-4">
-      <h3> Rejected Requests </h3>
-      <% if @rejected_requests.any? %>
-        <ol><%= render @rejected_requests %></ol>
-        <%= paginate @confirmed_requests %>
-      <% end %>
-  </div>
-  </div>
-
-  <% else %>
-  <div class="row">
-    <div class="incoming col-md-4">
-      <h3> Pendding Requests <h3>
-      <% if @incoming_requests.any? %>
-        <ol><%= render @incoming_requests %></ol>
-         <%= paginate @incoming_requests %>
-        <% end %>
-    </div>
-    <div class = "confirmed col-md-4">
-      <h3> Approved Requests <h3>
-      <% if @confirmed_requests.any? %>
-        <%= render @confirmed_requests %>
-         <%= paginate @confirmed_requests %>
-      <% end %>
-      <% if @received_requests.any? %>
-      <%= render @received_requests %>
-        <%= paginate @received_requests %>
-      <% end %>
-
-      <% if @returned_requests.any? %>
-      <%= render @returned_requests %>
-        <%= paginate @returned_requests %>
-      <% end %>
-    </div>
-    <div class = "confirmed col-md-4">
-      <h3> Rejected Requests </h3>
-      <% if @rejected_requests.any? %>
-        <ol><%= render @rejected_requests %></ol>
-         <%= paginate @rejected_requests %>
-      <% end %>
-  </div>
-  <% end %>
-<% end %>
-
+    <tbody>
+      <%= render @requests %>
+    </tbody>
+  </table>

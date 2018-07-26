@@ -1,13 +1,41 @@
-<% if admin_user? %>
-  <%= render "shared/control_bar" %>
-<% end %>
+ <%= image_tag @book.picture.url, class: "book_show_image" %>
+  <div class="show_info_book">
+    <h2><%= @book.name %></h2>
+    <br></br>
+    <h4><b>Category: <%= link_to @book.category.name, category_path(@book.category) %></b></h4>
+    <h4><b>Author: <%= link_to @book.author.name, author_path(@book.author) %></b></h4>
+    <h4><b>Publisher: <%= link_to @book.publisher.name, publisher_path(@book.publisher) %></b></h4>
+    <h4><b>Description:</b> <%= @book.description %></h4>
+    <h4><b> <% if @book.number <= 0 %>
+      <h5 class="product-price" style="color:red">Out of service</h5>
+      <% else %>
+      <h5 class="product-price"><b>Number of book:<%= @book.number %> left</h5></b></h4>
+      <p style="color: red"> Field with (*) must be exist</p>
+      <%= form_for @request do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            <div class="field">
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.hidden_field :book_id, value: @book.id %>
+              <p><b>(*)Borrow date</b></p>
+              <%= f.date_field :borrow_date, class: "form-control"%>
+              <p><b>(*)Return date</b></p>
+              <%= f.date_field :return_date, class: "form-control" %>
+            </div>
+            <i><%= f.submit "Borrow this book", class: "btn btn-primary add-to-cart" %></i>
+          <% end %>
+      <% end %>
   </div>
-
-<div class="show_book col-md-9">
- <div class="category_left col-md-3">
-        <p></p>
-        <%= form_tag(root_path, :method => "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Search books", class: 'form-control', id: "filter-autocomplete-search" %>
-          <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
-       <% end %>
+  <div class="col-md-12">
+  <div class="section-title">
+    <h2 class="title">Books you may like</h2>
+    <div class="pull-right">
+      <div class="product-slick-dots-1 custom-dots"></div>
+    </div>
+  </div>
 </div>
+<div class="book_content">
+  <% if @books.any? %>
+    <%= render @books.limit(4) %>
+  <% end %>
+</div>
+

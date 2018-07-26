@@ -31,7 +31,8 @@ before_action :load_request
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by id: params[:id]
+    @requests = @user.find_requests
   end
 
   def edit

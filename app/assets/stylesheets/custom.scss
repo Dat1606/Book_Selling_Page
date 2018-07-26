@@ -329,6 +329,7 @@ footer ul li {
   padding-top: 20px;
   border-right : 2px solid $gray-lighter;
   border-left : 2px solid $gray-lighter;
+  padding-bottom: 20px;
 
 }
 .book_form {
@@ -1042,4 +1043,19 @@ body {
 .book_image_1 {
   width: 280px;
   height: 380px;
+}
+
+.book_show_image {
+  height : 500px;
+  width: 40%;
+}
+
+.show_info_book {
+  width: 50%;
+  float: right;
+}
+
+.img_preview {
+  height:50px;
+  width: 60px;
 }

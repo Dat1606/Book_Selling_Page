@@ -13,9 +13,22 @@
   </aside>
 </div>
  <%= render 'follow_form' if logged_in? %>
-<%# if @categories.any? %>
-<ol class="microposts">
-   <%#= render @categories %>
-</ol>
-<%# end %>
+<% if @requests.any? %>
+<h2>All Requests</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-md-2">Request name </th>
+        <th class="col-md-2">User name</th>
+        <th class="col-md-2">Book name</th>
+        <th class="col-md-2">Borrow date</th>
+        <th class="col-md-2">Return date</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <%= render @requests %>
+    </tbody>
+  </table>
+
+<% end %>

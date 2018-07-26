@@ -1,1 +1,2 @@
 $("#like_form<%= @book.id %>").html("<%= j render('books/like', book: @book) %>");
+$(".like_count<%= @book.id %>").html("<%= @book.book_likes.count %>");

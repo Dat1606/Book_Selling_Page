@@ -9,13 +9,13 @@ class Request < ApplicationRecord
   validate :valid_time2
 
   def valid_time
-    if  borrow_date < Date.today
+    if borrow_date && borrow_date < Date.today
       errors.add(:borrow_date, "can't be in the past")
     end
   end
 
   def valid_time2
-    if  return_date <= borrow_date
+    if return_date && return_date <= borrow_date
       errors.add(:return_date, "is invalid")
     end
   end

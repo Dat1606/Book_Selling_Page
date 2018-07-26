@@ -1,8 +1,5 @@
 <% provide(:title, "Edit book") %>
-<% if admin_user? %>
-    <%= render "shared/control_bar" %>
-<% end %>
- <div class="show_book col-md-8">
+
 <h1> Edit book </h1>
   <div class="col-md-6 col-md-offset-3">
     <%= form_for [@category, @book] do |f| %>
@@ -24,4 +21,3 @@
   <%= f.submit "Save change", class: "btn btn-primary" %>
 <% end %>
   </div>
-</div>

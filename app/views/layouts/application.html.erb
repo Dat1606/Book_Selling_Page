@@ -15,11 +15,14 @@
   </head>
   <body>
     <%= render "layouts/header" %>
-    <div class="content1 container-fluid" >
-      <% flash.each do |message_type, message| %>
-      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-      <% end %>
-    <%= yield %>
+    <div class="content1 container-fluid">
+      <%= render "shared/control_bar" %>
+      <div class="show_book col-md-9">
+        <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+        <%= yield %>
+      </div>
     </div>
   </body>
 

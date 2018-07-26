@@ -1,16 +1,13 @@
-<% if admin_user? %>
-  <%= render "shared/control_bar" %>
-<% end %>
-<div class="show_book col-md-9">
-<h2>Categories</h2>
+  <h2>Categories</h2>
    <ol class="micropos">
+    <% if admin_user? %>
   <%= form_for @category do |f| %>
   <%= f.text_field :name,  placeholder: "Create category", class: 'search1 form-control' %>
   <%= f.submit "Create", class: "search2 btn btn-primary" %>
+  <% end %>
   <% end %>
   <%= render @categories %></ol>
   <%= paginate @categories %>
 <% if @categories.blank? %>
   <h4>There are no categories containing the term "<%= params[:search] %>".</h4>
 <% end %>
-</div>

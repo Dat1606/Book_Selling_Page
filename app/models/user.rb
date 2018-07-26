@@ -25,6 +25,8 @@ class User < ApplicationRecord
   has_many :active_likes, class_name:  Like.name,
     foreign_key: "user_id", dependent: :destroy
   has_many :user_like, through: :active_likes, source: :book
+  attr_accessor :remember_token
+
   def User.digest string
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
@@ -34,6 +36,7 @@ class User < ApplicationRecord
   def User.new_token
     SecureRandom.urlsafe_base64
   end
+
 
   def remember
     self.remember_token = User.new_token

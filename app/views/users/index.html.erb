@@ -1,14 +1,11 @@
 <% provide(:title, t("all_users")) %>
   <% if admin_user? %>
-      <%= render "shared/control_bar" %>
-      <div class="show_book col-md-9">
     <h1><%= link_to t("all_users"), users_path %></h1>
     <p><%= link_to '<button type="button" class="btn btn-primary" >Create new user</button>'.html_safe, signup_path %></p>
   <% end %>
    <%= form_tag(users_path,  :method => "get", id: "search-form", html: { multipart: true }) do |f| %>
      <%= submit_tag "Search", :name => nil, class: "search2 btn btn-primary" %>
    <%= text_field_tag :search, params[:search], placeholder: "Search user...", class: "search1" %>
-
       <% end %>
 
     <% if @users.blank? %>
@@ -19,5 +16,5 @@
       <%= render @users %>
     </ul>
     <%= paginate @users %>
-</div>
+
 

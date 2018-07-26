@@ -1,13 +1,24 @@
 <% if logged_in? %>
-  <% if admin_user? %>
-    <%= render "shared/control_bar" %>
-    <% end %>
-    <% end %>
-  <div class="show_book col-md-9">
 <% if @received_requests.any? %>
-<ol><%= render @received_requests %></ol>
+<h2>Received (Book) Requests</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-md-2">Request name </th>
+        <th class="col-md-2">User name</th>
+        <th class="col-md-2">Book name</th>
+        <th class="col-md-2">Borrow date</th>
+        <th class="col-md-2">Return date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @received_requests %>
+    </tbody>
+  </table>
+
 <% end %>
-<% if @confirmed_requests.blank? %>
+<% if @received_requests.blank? %>
   <h1> There are currently no received (book) requests .</h1>
   <% end %>
-</div>
+<% end %>

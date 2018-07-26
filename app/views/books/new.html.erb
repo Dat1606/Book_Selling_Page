@@ -1,35 +1,28 @@
 <% if admin_user? %>
-  <%= render "shared/control_bar" %>
-<% end %>
-<div class="show_book col-md-8">
-<% if @books.any? %>
-<ol class="microposts">
-  <%= render @books %>
-</ol>
-  <%= paginate @books %>
-<% end %>
-</div>
-<div class="book_form col-md-4">
+  <h1 style="text-align: center; color:blue; font-weight: bold"> Create new book </h1>
+  <p style="color:red"> Field with (*) are required </p>
   <%= form_for [@category, @book] do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <span class="picture">
-      <%= f.label :Upload_Picture %>
+     <p><b><span style="color:red">*</span>Set book name </b></p>
+    <%= f.text_field :name, placeholder: "Set book name...", class: "form-control" %>
+    <p><b><span style="color:red">*</span>Choose category </b></p>
+    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {},class: "form-control"  %>
+    <p><b><span style="color:red">*</span>Choose Author </b></p>
+    <%= f.collection_select :author_id, Author.order(:name),:id,:name, {},class: "form-control"  %>
+    <p><b><span style="color:red">*</span>Choose Publisher </b></p>
+    <%= f.collection_select :publisher_id, Publisher.order(:name),:id,:name,  {}, class: "form-control"  %>
+     <p><b><span style="color:red">*</span>Set number </b></p>
+    <%= f.text_field :number,placeholder: "Set number of books...", class: "form-control"  %>
+    <%= f.label :Write_a_description %>
+    <%= f.text_area :description, placehoder: "Write a description", class: "form-control" %>
+       <span class="picture">
+      <p><b><span style="color:red">*</span>Upload a picture </b></p>
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "form-control" %>
     </span>
-     <%= f.label :Set_book_name %>
-    <%= f.text_field :name, placeholder: "Set book name...", class: "form-control" %>
-    <%= f.label :Set_category %>
-    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {},class: "form-control"  %>
-    <%= f.label :Choose_Author %>
-    <%= f.collection_select :author_id, Author.order(:name),:id,:name, {},class: "form-control"  %>
-    <%= f.label :Choose_Publisher %>
-    <%= f.collection_select :publisher_id, Publisher.order(:name),:id,:name,  {}, class: "form-control"  %>
-     <%= f.label :Set_number %>
-    <%= f.text_field :number,placeholder: "Set number of books...", class: "form-control"  %>
   <%= f.submit "Create book", class: "btn btn-primary" %>
 <% end %>
-
+<% end %>
 <script type="text/javascript">
   $('#micropost_picture').bind('change', function() {
     var size_in_megabytes = this.files[0].size/1024/1024;
@@ -38,4 +31,5 @@
     }
   });
 </script>
-</div>
+
+

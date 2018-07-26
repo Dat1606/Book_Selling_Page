@@ -1,8 +1,4 @@
-<% if admin_user? %>
-  <%= render "shared/control_bar" %>
-<% end %>
-<div class="show_book col-md-9">
- <% if logged_in? %>
+<% if logged_in? %>
   <h2 class="category"><%=link_to ("Request " + @request.id.to_s ), request_path(request) %></h2>
   <%= render @book %>
   <div class="show_book_right">
@@ -48,5 +44,3 @@
     <% end %>
     <% end %>
   </div>
-</div>
-

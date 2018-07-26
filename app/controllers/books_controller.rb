@@ -14,6 +14,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @books = Book.order(:name).page params[:page]
     @request = Request.new()
     @categories = Category.all
     @author = Author.find_by id: @book.author_id
@@ -78,7 +79,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-      params.require(:book).permit(:name, :picture,:category_id, :user_id, :author_id, :publisher_id, :number)
+      params.require(:book).permit(:name, :description, :picture,:category_id, :user_id, :author_id, :publisher_id, :number)
   end
 
   def load_show

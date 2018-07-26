@@ -1,16 +1,13 @@
-<% if admin_user? %>
-  <%= render "shared/control_bar" %>
-<% end %>
-<div class="show_book col-md-9">
 <ul class="users">
   <h2> All authors</h2>
   <ol class="micropos">
+    <% if admin_user? %>
   <%= form_for @author do |f| %>
   <%= f.text_field :name,  placeholder: "Create author", class: 'search1 form-control' %>
   <%= f.submit "Create", class: "search2 btn btn-primary" %>
   <% end %>
+  <% end %>
 <% if @authors.any? %>
-<b><%= render @authors %></b></ol>
+<b><%= render @authors %></b>
 <% end %>
 </ul>
-</div>
