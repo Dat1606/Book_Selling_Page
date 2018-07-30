@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :likes
   resources :relationships, only: [:create, :destroy]
   resources :searches
+  resources :general_categories
   get "users/new"
   root "static_pages#home"
   get "/signup",  to: "users#new"

@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :admin_user, only: [:create, :destroy]
   before_action :load_show, only: :show
   before_action :load_request
-  before_action :logged_in_user
+  before_action :logged_in_user, :find_category
 
   def index
     @books = Book.order(:name).page params[:page]
@@ -34,8 +34,8 @@ class BooksController < ApplicationController
       #redirect_to new_category_book_path(@category)
       redirect_back(fallback_location: root_path)
     else
-      @book.errors.full_messages
-      flash[:danger] = "Cannot create the book. Name, number or image must be exist"
+
+      flash[:danger] =  @book.errors.full_messages
       redirect_back(fallback_location: root_path)
     end
   end
@@ -86,6 +86,13 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @category = Category.find_by id: params[:category_id]
     @user = current_user
+  end
+
+  def find_category
+    @categories = Category.all
+    @category1 = Category.where(general_category_id: 1)
+    @category2 = Category.where(general_category_id: 2)
+    @category3 = Category.where(general_category_id: 3)
   end
 
 end

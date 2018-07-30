@@ -1,0 +1,10 @@
+  <% if admin_user? %>
+  <h1>Create a sub category</h1>
+  <%= form_for @category do |f| %>
+  <%= f.label :Select_Category %>
+  <%= f.collection_select :general_category_id, GeneralCategory.order(:name),:id,:name, {},class: "form-control"  %>
+  <%= f.label :Set_Sub_Category_name %>
+  <%= f.text_field :name,  placeholder: "Create category", class: 'form-control' %>
+  <%= f.submit "Create", class: "btn btn-primary" %>
+  <% end %>
+  <% end %>

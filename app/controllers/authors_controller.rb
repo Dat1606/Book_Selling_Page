@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-   before_action :load_request
+   before_action :load_request, :find_category
 
   def show
     @author = Author.find_by id: params[:id]
@@ -36,5 +36,12 @@ class AuthorsController < ApplicationController
 
   def author_params
     params.require(:author).permit(:name)
+  end
+
+  def find_category
+    @categories = Category.all
+    @category1 = Category.where(general_category_id: 1)
+    @category2 = Category.where(general_category_id: 2)
+    @category3 = Category.where(general_category_id: 3)
   end
 end

@@ -32,5 +32,8 @@ class StaticPagesController < ApplicationController
 
   def find_category
     @categories = Category.all
+    @category1 = Category.where(general_category_id: 1)
+    @category2 = Category.where(general_category_id: 2)
+    @category3 = Category.where(general_category_id: 3)
   end
 end

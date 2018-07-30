@@ -14,9 +14,14 @@ User.create!(name:  "Admin",
     password_confirmation: password)
 end
 
-10.times do |n|
-  name = Faker::Book.title
-  Category.create! name: name, user_id: rand(1..3)
+5.times do |n|
+  name = Faker::Name.name
+  GeneralCategory.create! name: name
+end
+
+25.times do |n|
+  name = Faker::Name.name
+  Category.create! name: name,  general_category_id: rand(1..3)
 end
 
 5.times do |n|
@@ -27,7 +32,7 @@ end
 
 
 5.times do |n|
-  name = Faker::Book.title
+  name = Faker::Name.name
   Publisher.create! name:name
 end
 

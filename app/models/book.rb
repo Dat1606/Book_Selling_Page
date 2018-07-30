@@ -18,6 +18,7 @@ class Book < ApplicationRecord
   validates :category_id, presence: true
   validates :picture, presence: true
   validates :number, presence: true
+  validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
 
   scope :search, ->q{where "name LIKE \'%#{q}%\'"}
    private

@@ -1,5 +1,5 @@
 class PublishersController < ApplicationController
-   before_action :load_request
+   before_action :load_request, :find_category
    before_action :logged_in_user
 
   def show
@@ -28,7 +28,8 @@ class PublishersController < ApplicationController
       flash[:success] = "Publisher created!"
       redirect_to publishers_url
     else
-       render 'static_pages/home'
+       flash[:danger] = @publisher.errors.full_messages
+      redirect_back(fallback_location: root_path)
     end
   end
     private
@@ -36,4 +37,11 @@ class PublishersController < ApplicationController
     def publisher_params
       params.require(:publisher).permit(:name)
     end
+
+  def find_category
+    @categories = Category.all
+    @category1 = Category.where(general_category_id: 1)
+    @category2 = Category.where(general_category_id: 2)
+    @category3 = Category.where(general_category_id: 3)
+  end
 end

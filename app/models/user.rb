@@ -21,6 +21,7 @@ class User < ApplicationRecord
     uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true, length: {minimum: Settings.password.minimum}
+  validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
 
   has_many :active_likes, class_name:  Like.name,
     foreign_key: "user_id", dependent: :destroy
