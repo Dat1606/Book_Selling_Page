@@ -1,0 +1,24 @@
+<div class="col-md-4">
+   <h2>Categories</h2>
+    <ul id="tree1">
+        <li><a href="#">Categories</a>
+            <ul>
+                <%= render @categories1 %>
+            </ul>
+        </li>
+    </ul>
+  <%= render "categories/tree_view" %>
+</div>
+<% if @categories.blank? %>
+  <h4>There are no categories containing the term "<%= params[:search] %>".</h4>
+<% end %>
+<div class="col-md-6" style="float:right">
+  <h2>Edit category </h2>
+<%= form_for @category do |f| %>
+  <%= f.label :Choose_Parent_Category %>
+  <%= f.collection_select :parent_id, @valid_categories,:id,:name, {},class: "form-control"  %>
+  <%= f.label :Set_Category_name %>
+  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.submit "Create", class: "btn btn-primary" %>
+<% end %>
+</div>

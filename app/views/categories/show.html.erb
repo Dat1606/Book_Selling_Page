@@ -1,4 +1,6 @@
-
+<% if admin_user? %>
+<%= link_to "Delete this category", @category, method: :delete, data: {confirm: t("are_you_sure")} %>
+<% end %>
 <% if @books.any? %>
 <ol class="microposts">
   <%= render @books %>

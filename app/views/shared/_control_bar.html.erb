@@ -30,29 +30,7 @@
                 </li></a>
                 <ul class="sub-menu collapse" id="service">
                   <a href="<%= categories_path %>" style="color:white"><li>All categories</li></a>
-                  <li data-toggle="collapse" data-target="#daulau" class="collapsed">
-                    <a><%=  (GeneralCategory.find_by id: 1).name %> <span class="caret"></span></a></li>
-                    <ul class="sub-menu collapse" id="daulau">
-                      <% if @category1.any? %>
-                      <%= render @category1 %>
-                      <% end %>
-                    </ul>
-
-                      <li data-toggle="collapse" data-target="#daunguoi" class="collapsed">
-                    <a><%=  (GeneralCategory.find_by id: 2).name %> <span class="caret"></span></a></li>
-                    <ul class="sub-menu collapse" id="daunguoi">
-                      <% if @category2.any? %>
-                      <%= render @category2 %>
-                      <% end %>
-                    </ul>
-
-                <li data-toggle="collapse" data-target="#daubo" class="collapsed">
-                    <a><%=  (GeneralCategory.find_by id: 3).name %> <span class="caret"></span></a></li>
-                    <ul class="sub-menu collapse" id="daubo">
-                      <% if @category3.any? %>
-                      <%= render @category3 %>
-                      <% end %>
-                    </ul>
+                  <%#= render Category.where(depth: 1) %>
                 </ul>
 
                 <a style="color:white"><li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -74,8 +52,7 @@
                   <i class="fa fa-users fa-lg"></i> Users</li></a>
                 <% if admin_user? %>
                 <a href="<%= signup_path %>" style="color:white"><li><i class="fa fa-plus"></i> Create a new user</li></a>
-                <a href="<%= general_categories_path %>" style="color:white"><li><i class="fa fa-plus"></i> Create new category</li></a>
-                 <a href="<%= new_category_path %>" style="color:white"><li><i class="fa fa-plus"></i> Create new sub category</li></a>
+                 <a href="<%= new_category_path %>" style="color:white"><li><i class="fa fa-plus"></i> Create new category</li></a>
 
                 <% end %>
             </ul>

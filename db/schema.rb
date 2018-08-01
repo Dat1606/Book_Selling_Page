@@ -35,11 +35,13 @@ ActiveRecord::Schema.define(version: 2018_07_30_023619) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.integer "general_category_id"
     t.string "name"
+    t.integer "left"
+    t.integer "right"
+    t.integer "depth"
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["general_category_id"], name: "index_categories_on_general_category_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -59,12 +61,6 @@ ActiveRecord::Schema.define(version: 2018_07_30_023619) do
     t.index ["book_id"], name: "index_follow_books_on_book_id"
     t.index ["user_id", "book_id"], name: "index_follow_books_on_user_id_and_book_id", unique: true
     t.index ["user_id"], name: "index_follow_books_on_user_id"
-  end
-
-  create_table "general_categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|

@@ -1,7 +1,9 @@
 <li><b><%=link_to category.name, category_path(category) %></b>
   <% if logged_in? %>
-  <%# if admin_user? %>
+  <% if admin_user? %>
     <%#= link_to t("delete"), category, method: :delete, data: {confirm: t("are_you_sure")} %>
-  <%# end %>
+    <%#= link_to "Edit", edit_category_path(category.id) %>
   <% end %>
+  <% end %>
+  <ul><%= render  get_children(category.id) %></ul>
 </li>

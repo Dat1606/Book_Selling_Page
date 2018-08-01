@@ -3,7 +3,7 @@ class Book < ApplicationRecord
   belongs_to :user
   belongs_to :publisher
   belongs_to :author
-  has_many :comments, dependent: :destroy
+  has_many :comments
   mount_uploader :picture, PictureUploader
   default_scope -> {order(created_at: :desc)}
   has_many :requests, dependent: :destroy

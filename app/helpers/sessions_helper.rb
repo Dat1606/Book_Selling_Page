@@ -61,6 +61,11 @@ module SessionsHelper
     current_user.admin?
   end
 
+  def load_category
+    @categories = Category.all
+    @categories1 = Category.where(depth: 1)
+    @category1 = Category.where(left: 2)
+  end
   def load_request
     @request = Request.new
     @requests = Request.all

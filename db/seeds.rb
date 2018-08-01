@@ -14,15 +14,11 @@ User.create!(name:  "Admin",
     password_confirmation: password)
 end
 
-5.times do |n|
-  name = Faker::Name.name
-  GeneralCategory.create! name: name
-end
-
-25.times do |n|
-  name = Faker::Name.name
-  Category.create! name: name,  general_category_id: rand(1..3)
-end
+  Category.create! name: "Categories", left: 1, right: 10, depth: 0
+  Category.create! name: "Sport", left: 2 , right: 3, depth: 1, parent_id: 1
+  Category.create! name: "Romance", left: 4, right: 5, depth: 1, parent_id: 1
+  Category.create! name: "Thriller", left: 6 , right: 7, depth: 1, parent_id: 1
+  Category.create! name: "Science", left: 8 , right: 9, depth: 1, parent_id: 1
 
 5.times do |n|
   name = Faker::Name.name
@@ -39,7 +35,7 @@ end
 
 books = []
 50.times do |n|
-  Book.create(name: Faker::Name.name, category_id: rand(1..4), number: rand(10..27),  user_id: 1, author_id: rand(1..5) ,
+  Book.create(name: Faker::Book.genre, category_id: rand(2..4), number: rand(10..27),  user_id: 1, author_id: rand(1..5) ,
   description: Faker::Lorem.sentence(4), publisher_id: rand(1..5),
     picture: File.open(File.join(Rails.root,"app/assets/images/#{rand(1..5)}.jpg")) )
 end
@@ -51,4 +47,5 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
 

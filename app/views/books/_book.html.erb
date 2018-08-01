@@ -6,7 +6,7 @@
       <button class="main-btn quick-view" data-toggle="modal" data-target="#myModal-<%= book.id %>"><i class="fa fa-search-plus" > </i> Quick view</button>
       <%= image_tag book.picture.url , class: "book_image" %>
     </div>
-    <div class="product-body" style="height: 179px;">
+    <div class="product-body" style="height: 200px;">
       <% if book.number <= 0 %>
       <h5 class="product-price" style="color:red">Out of service</h5>
       <% else %>
