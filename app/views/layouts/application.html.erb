@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html>
-<% if logged_in? %>
   <head>
     <link rel="icon" type="image/png" href="/assets/favicon.png">
     <title><%= full_title(yield :title) %></title>
@@ -11,41 +9,24 @@
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
     <%= render 'layouts/shim' %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
   </head>
   <body>
     <%= render "layouts/header" %>
     <div class="content1 container-fluid">
-      <%= render "shared/control_bar" %>
-      <div class="show_book col-md-9">
+      <% if logged_in? && admin_user? %>
+        <%= render "shared/control_bar" %>
+        <div class="show_book col-md-10">
+        <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+          <%= yield %>
+        </div>
+      <% else %>
         <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
         <% end %>
         <%= yield %>
-      </div>
-    </div>
-  </body>
-
-  </html>
-<% else %>
-  <head>
-    <link rel="icon" type="image/png" href="/assets/favicon.png">
-    <title><%= full_title(yield :title) %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
-    <%= render 'layouts/shim' %>
-  </head>
-  <body>
-    <%= render "layouts/header" %>
-     <div class="container-fluid" id="content">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
-    <%= yield %>
     </div>
   </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-</html>
-<% end %>
+  </html>

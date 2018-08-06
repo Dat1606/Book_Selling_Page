@@ -21,10 +21,6 @@
       </div>
       <p ><span class="like_count<%= book.id %>"><%= book.book_likes.count %></span> <i class="fa fa-heart" style="color:red"></i></p>
       <h2 class="product-name"><a href="#"><%= link_to book.name, category_book_path(book.category, book) %></a></h2>
-      <% if admin_user? %>
-      <span><%= link_to "edit", edit_category_book_path(book.category, book) %></span>
-       <span class="delete"><%= link_to t("delete"), category_book_path(book.category, book), method: :delete, data: {confirm: t("are_you_sure")} %></span>
-       <% end %>
       <div class="product-btns" style="float:bottom">
         <%= render "books/like_form", book: book %>
           <span><button class="primary-btn add-to-cart" data-toggle="modal" data-target="#myModal-<%= book.id %>" style="margin-left:5px;"><i class="fa fa-shopping-cart"></i> Borrow</button></span>
@@ -55,22 +51,28 @@
           <p>Author: <%=link_to book.author.name, author_path(book.author.id) %></p>
           <p>Description: <%= book.description %></p>
           <p><span class="like_count<%= book.id %>"><%= book.book_likes.count %></span> <i class="fa fa-heart" style="color:red"></i> </p>
-          <% if book.number <= 0 %>
-          <h4>Sorry, the book you are looking for is now not available.Please try again later</h4>
-          <% else %>
-          <span style="color: red"> Field with (*) must be exist</span>
-          <%= form_for @request do |f| %>
-            <%= render 'shared/error_messages', object: f.object %>
-            <div class="field">
+          <% if book.number >= 1 %>
+            <% if logged_in? %>
+              <span style="color: red"> Field with (*) must be exist</span>
+              <%= form_for @request do |f| %>
+              <%= render 'shared/error_messages', object: f.object %>
+              <div class="field">
               <%= f.hidden_field :user_id, value: current_user.id %>
               <%= f.hidden_field :book_id, value: book.id %>
               <p><b>(*)Borrow date</b></p>
               <%= f.date_field :borrow_date, class: "form-control"%>
               <p><b>(*)Return date</b></p>
               <%= f.date_field :return_date, class: "form-control" %>
-            </div>
-            <i><%= f.submit "Borrow this book", class: "btn btn-primary add-to-cart" %></i>
+              </div>
+              <i><%= f.submit "Borrow this book", class: "btn btn-primary add-to-cart" %></i>
+              <% end %>
+              <% end %>
           <% end %>
+          <% if book.number <= 0 %>
+          <h4>Sorry, the book you are looking for is now not available.Please try again later</h4>
+          <% end %>
+          <% unless logged_in? %>
+          <h5> Please <button class="primary-btn " data-toggle="modal" data-dismiss="modal" data-target="#login" style="margin-left:5px;"> Log in</button> or <button class="primary-btn " data-toggle="modal" data-dismiss="modal" data-target="#signup" style="margin-left:5px;"> Sign up</button> to get this book</h5>
           <% end %>
         </div>
       </div>

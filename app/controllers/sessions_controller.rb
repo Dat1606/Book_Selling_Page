@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to root_url
     else
       flash[:danger] = t("invalid_login")
-      redirect_to root_url
+      redirect_back(fallback_location: root_url)
     end
   end
 

@@ -1,0 +1,54 @@
+<tr>
+  <td class= "text-center"><%= book.id.to_s %></td>
+  <td class= "text-center"><%=link_to book.name, category_book_path(book.category, book) %></td>
+  <td class= "text-center"><%= truncate(book.description, length: 30) %></td>
+  <td class= "text-center"><%= book.book_likes.count %></td>
+  <td class= "text-center"><%= link_to book.category.name, category_path(book.category) %></td>
+   <td class="text-center"><i title="Edit" class="fa fa-edit" data-toggle="modal" style="color:blue; font-size: 20px; cursor: pointer;" data-target="#myModal-<%= book.id %>"></i> <%= link_to "",category_book_path(book.category, book), class: "trash glyphicon glyphicon-trash", method: :delete, data: {confirm: t("are_you_sure")} %></td>
+</tr>
+<!-- The Modal -->
+<div class="modal" id="myModal-<%= book.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= link_to book.name, category_book_path(book.category, book) %></h4>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="modal-body-left">
+          <%= image_tag book.picture.url , class: "book_image_1" %>
+        </div>
+        <div class ="modal-body-right">
+            <%= form_for [book.category,book] do |f| %>
+              <%= render "shared/error_messages",  object: f.object %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+              <%= f.label :Choose_Author %>
+              <%= f.collection_select :author_id, Author.order(:name),:id,:name, {},class: "form-control"  %>
+              <%= f.label :Choose_Publisher %>
+              <%= f.collection_select :publisher_id, Publisher.order(:name),:id,:name,  {}, class: "form-control"  %>
+              <%= f.label :Set_number %>
+              <%= f.text_field :number,placeholder: "Set book nunber...", class: "form-control"  %>
+                   <span class="picture">
+              <%= f.label :Upload_Picture %>
+              <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "form-control" %>
+              </span>
+              <%= f.submit "Save change", class: "btn btn-success" %>
+            <% end %>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Close</button>
+      </div>
+
+  </div>
+  </div>
+</div>

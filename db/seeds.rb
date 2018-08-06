@@ -14,15 +14,18 @@ User.create!(name:  "Admin",
     password_confirmation: password)
 end
 
-  Category.create! name: "Categories", left: 1, right: 10, depth: 0
-  Category.create! name: "Sport", left: 2 , right: 3, depth: 1, parent_id: 1
-  Category.create! name: "Romance", left: 4, right: 5, depth: 1, parent_id: 1
-  Category.create! name: "Thriller", left: 6 , right: 7, depth: 1, parent_id: 1
-  Category.create! name: "Science", left: 8 , right: 9, depth: 1, parent_id: 1
+  Category.create! name: "Categories", depth: 0
+10.times do |n|
+  Category.create! name: Faker::Book.genre, depth: 1, parent_id: 1
+end
 
-5.times do |n|
+20.times do |n|
+  Category.create! name: Faker::Book.genre, depth: 2, parent_id: rand(1..10)
+end
+
+20.times do |n|
   name = Faker::Name.name
-  Author.create! name: name
+  Author.create! name: name, description: Faker::Lorem.sentence(15)
 end
 
 
@@ -34,8 +37,8 @@ end
 
 
 books = []
-50.times do |n|
-  Book.create(name: Faker::Book.genre, category_id: rand(2..4), number: rand(10..27),  user_id: 1, author_id: rand(1..5) ,
+70.times do |n|
+  Book.create(name: Faker::Book.genre, category_id: rand(2..15), number: rand(10..27),  user_id: 1, author_id: rand(1..5) ,
   description: Faker::Lorem.sentence(4), publisher_id: rand(1..5),
     picture: File.open(File.join(Rails.root,"app/assets/images/#{rand(1..5)}.jpg")) )
 end

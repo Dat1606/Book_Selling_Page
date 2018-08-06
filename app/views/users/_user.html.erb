@@ -1,7 +1,10 @@
-  <li><%= gravatar_for user, size: 50 %>
-  <b><%= link_to user.name, user %></b>
-  <% if current_user.admin? && !current_user?(user) %>
-  <br></br>
-    <span class="delete"><%= link_to t("delete"), user, method: :delete, data: {confirm: t("are_you_sure")} %></span>
+<tr>
+  <td class="text-center"><b><%= link_to user.id , user %></b></td>
+  <td class="text-center"><b><%= link_to user.name, user %></b></td>
+  <td class="text-center"><b><%= user.email %></b></td>
+  <% if logged_in? %>
+  <% if admin_user? %>
+    <td class="text-center"><%= link_to "", user, method: :delete, data: {confirm: t("are_you_sure")}, class: "trash glyphicon glyphicon-trash" %></td>
   <% end %>
-</li>
+  <% end %>
+</tr>

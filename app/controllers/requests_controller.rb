@@ -10,7 +10,7 @@ class RequestsController < ApplicationController
     @request.status = 1
     if @request.save
       flash[:success] = "Request created!"
-      redirect_to root_url
+      redirect_back(fallback_location: root_path)
     else
      flash[:danger] = @request.errors.full_messages
      redirect_back(fallback_location: root_path)
@@ -49,15 +49,21 @@ class RequestsController < ApplicationController
 
   def index
     if logged_in?
+      @request = Request.find_by(id: params[:id])
+      #@book = Book.find_by(id: @request.book_id)
       @requests = current_user.find_requests
       if admin_user?
         @requests = Request.all
       end
-      @received_requests =  (@requests.where(status: 3 )).order(:id).page params[:page]
-      @confirmed_requests = (@requests.where(status: 2 )).order(:id).page params[:page]
-      @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
-      @returned_requests =  (@requests.where(status: 5 )).order(:id).page params[:page]
-      @rejected_requests = @requests.where(status: 4).order(:id).page params[:page]
+      if params[:requests]
+        @requests = @requests.where status: params[:requests]
+        respond_to :js
+        if params[:requests] == "0"
+        @requests = current_user.find_requests
+        @requests = Request.all if admin_user?
+        respond_to :js
+        end
+      end
     end
   end
 
@@ -119,15 +125,5 @@ private
 
   def find_book
     @book = Book.find_by id: params[:request][:book_id]
-  end
-
-  def convert_borrow_date
-    date_time = params[:request]
-    return Date.new date_time["borrow_date(1i)"].to_i, date_time["borrow_date(2i)"].to_i, date_time["borrow_date(3i)"].to_i
-  end
-
-  def convert_return_date
-    date_time = params[:request]
-    return Date.new date_time["return_date(1i)"].to_i, date_time["return_date(2i)"].to_i, date_time["return_date(3i)"].to_i
   end
 end

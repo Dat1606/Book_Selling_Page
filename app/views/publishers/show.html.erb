@@ -1,5 +1,7 @@
+<div class="container">
 <h2><%= link_to @publisher.name, publisher_path %></h2>
 <% if @books.any? %>
   <%= render @books %>
   <%= paginate @books %>
 <% end %>
+</div>

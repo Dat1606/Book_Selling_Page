@@ -1,12 +1,13 @@
-<% if admin_user? %>
+<div class="container">
+<% if logged_in? && admin_user? %>
 <%= link_to "Delete this category", @category, method: :delete, data: {confirm: t("are_you_sure")} %>
 <% end %>
+<h1><%= @category.name %></h1>
 <% if @books.any? %>
-<ol class="microposts">
   <%= render @books %>
-</ol>
   <%= paginate @books %>
-  <% else %>
+<% else %>
   <h4>There are no books in this category</h4>
 <% end %>
+</div>
 </div>
