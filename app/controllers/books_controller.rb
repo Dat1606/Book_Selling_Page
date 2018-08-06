@@ -2,7 +2,6 @@ class BooksController < ApplicationController
   before_action :admin_user, only: [:create, :destroy]
   before_action :load_show, only: :show
   before_action :load_request
-  before_action :logged_in_user, :find_category
 
   def index
     @books = Book.order(:name).page params[:page]
@@ -14,6 +13,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @user = User.new
     @books = Book.order(:name).page params[:page]
     @request = Request.new()
     @categories = Category.all
@@ -87,9 +87,4 @@ class BooksController < ApplicationController
     @category = Category.find_by id: params[:category_id]
     @user = current_user
   end
-
-  def find_category
-    @categories = Category.all
-  end
-
 end

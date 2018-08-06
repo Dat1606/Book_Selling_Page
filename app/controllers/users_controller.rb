@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-before_action :logged_in_user, only: [:index, :edit , :update, :destroy]
+before_action :logged_in_user, only: [:edit , :update, :destroy]
 before_action :correct_user, only: [:edit, :update]
 before_action :load_user, only: [:destroy, :show]
 before_action :admin_user, only: :destroy
-before_action :load_category, only: :show
 before_action :load_request
 
   def index
@@ -96,9 +95,4 @@ before_action :load_request
     flash[:danger] = t "user_not_found"
     redirect_to root_path
   end
-
-  def load_category
-    @categories = Category.all
-  end
-
 end

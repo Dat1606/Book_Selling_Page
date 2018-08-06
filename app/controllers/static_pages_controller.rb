@@ -1,10 +1,10 @@
 class StaticPagesController < ApplicationController
-  before_action :find_book, :find_category, only: %i(create show home)
+  before_action :find_book, only: %i(create show home)
   before_action :load_request
   def home
     if logged_in?
       @feed_items = current_user.feed.order(:name).page params[:page]
-      @categoryy = Category.new
+      # @category = Category.new
       #@book   = Book.new
       @like = Like.new
       @request = Request.new
@@ -28,9 +28,5 @@ class StaticPagesController < ApplicationController
     @books = Book.order("name DESC")
     @book2 = Book.last(4)
     @book = Book.find_by id: params[:id]
-  end
-
-  def find_category
-    @categories = Category.all
   end
 end

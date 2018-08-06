@@ -1,16 +1,35 @@
-<% if logged_in? %>
-<header class="navbar navbar-light" style="background-color:#30323A ;margin-bottom: 0px;">
-  <div class="container">
-    <%= link_to "Thunder.", root_path, id: "logo" %>
+<header class="navbar navbar-light col-md-9" style="margin-bottom: 0px; float:right; height:30px;" >
     <nav>
-      <ul class="nav navbar-nav navbar-right">
-         <li><%= form_tag(category_books_path(1),  :method => "get", id: "search-form", html: { multipart: true }) do |f| %>
-              <%= submit_tag "Search", :name => nil, class: "search2 btn btn-primary" %>
-              <%= text_field_tag :search, params[:search], placeholder: "Search book...", class: "search1" %></li>
-            <% end %>
+      <% if logged_in?  && !admin_user? %>
+       <ul class="nav navbar-nav navbar-left">
+          <li class="divider"></li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Categories</a>
+                <ul class="dropdown-menu">
+                    <%= render Category.where(parent_id: 1) %>
+                </ul>
+              </li>
+        </ul>
+        <% elsif !logged_in? %>
+             <ul class="nav navbar-nav navbar-left">
+          <li class="divider"></li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#"><b>Categories</b></a>
+                <ul class="dropdown-menu">
+                    <%= render Category.where(parent_id: 1) %>
+                </ul>
+              </li>
+        </ul>
+        <% end %>
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
+          <li style="margin-right: 5px"><%= form_tag(category_books_path(1),  :method => "get", id: "search-form", html: { multipart: true }) do |f| %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search books...", class: "search1" %>
+            <%= submit_tag "Search", :name => nil, class: "search2 btn btn-primary" %>
+          <% end %></li>
+      <% if logged_in? %>
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              Account <b class="caret"></b>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown"><b>
+              Account </b><b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
@@ -21,37 +40,99 @@
               </li>
             </ul>
           </li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<% else %>
-<header class="navbar navbar-light" style="background-color: #563d7c;margin-bottom: 0px;">
-  <div class="container">
-    <%= link_to "Thunder.", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log in", root_path %></li>
-        <li><%= link_to "Sign up", signup_path %></li>
-        <% if logged_in? %>
-          <li><%= link_to "Users", '#' %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Account <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", '#' %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "Log out", logout_path, method: :delete %>
-              </li>
-            </ul>
-          </li>
+        </ul>
+      <% else %>
+        <li style="font-weight: bold"y><a href="#" data-toggle="modal" data-target="#login" style="margin-left:5px;"> Log in</a></li>
+        <li><button class="primary-btn " data-toggle="modal" data-target="#signup" style="margin-left:5px; margin-top: 4px;"> Sign up</button></li>
         <% end %>
-      </ul>
     </nav>
-  </div>
 </header>
-<% end %>
 
+<div class="modal" id="signup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Join us to get some books</h4>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+            <div class="sign_u">
+              <h1 align="center" style="color: #3498DB"><b><i>Sign up</i></b></h1>
+              <div class="col-md-6 col-md-offset-3">
+                <%= form_for(@user, url: signup_path) do |f| %>
+                  <%= render 'shared/error_messages', object: f.object %>
+                  <%= f.label :name %>
+                  <%= f.text_field :name, class: 'form-control' %>
+
+                  <%= f.label :email %>
+                  <%= f.email_field :email, class: 'form-control' %>
+
+                  <%= f.label :password %>
+                  <%= f.password_field :password, class: 'form-control' %>
+
+                  <%= f.label :password_confirmation, "Retype password" %>
+                  <%= f.password_field :password_confirmation, class: 'form-control' %>
+                  <%= f.submit "Create  account", class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Close</button>
+      </div>
+
+  </div>
+  </div>
+</div>
+
+
+<div class="modal" id="login">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Join us to get some books</h4>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h1 align="center" style="color: #3498DB"><b><i>Log in</i></b></h1>
+              <div class="col-md-6 col-md-offset-3">
+        <%= form_for(:session, url: login_path) do |f| %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control" %>
+
+        <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span><%= t "remember_password" %></span>
+        <% end %>
+
+        <%= f.submit t("log_in"), class: "btn btn-primary" %>
+        <% end %>
+        <p></p>
+        <p><%= t("new_user") %><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#signup" style="margin-left:5px;"> Sign up now</a></p>
+      </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Close</button>
+      </div>
+
+  </div>
+  </div>
+</div>

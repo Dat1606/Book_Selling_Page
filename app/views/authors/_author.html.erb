@@ -1,8 +1,11 @@
-<li><%= link_to author.name, author %>
-  <p></p>
+<tr>
+  <td><b><%= link_to author.id , author %></b></td>
+  <td><b><%= link_to author.name, author %></b></td>
+  <td><b><%= truncate(author.description, length: 100) %></b></td>
+  <td class="text-center"><b><%= link_to Book.where(author_id: author.id).count, author %></b></td>
   <% if logged_in? %>
   <% if admin_user? %>
-    <%= link_to t("delete"), author, method: :delete, data: {confirm: t("are_you_sure")} %>
+    <td><%= link_to t("delete"), author, method: :delete, data: {confirm: t("are_you_sure")} %></td>
   <% end %>
   <% end %>
-</li>
+</tr>

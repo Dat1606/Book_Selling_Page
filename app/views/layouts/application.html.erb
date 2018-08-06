@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html>
-<% if logged_in? %>
   <head>
     <link rel="icon" type="image/png" href="/assets/favicon.png">
     <title><%= full_title(yield :title) %></title>
@@ -25,27 +24,4 @@
       </div>
     </div>
   </body>
-
   </html>
-<% else %>
-  <head>
-    <link rel="icon" type="image/png" href="/assets/favicon.png">
-    <title><%= full_title(yield :title) %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
-    <%= render 'layouts/shim' %>
-  </head>
-  <body>
-    <%= render "layouts/header" %>
-     <div class="container-fluid" id="content">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-      <% end %>
-    <%= yield %>
-    </div>
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-</html>
-<% end %>

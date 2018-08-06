@@ -6,6 +6,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == "1" ? remember(user) : forget(user)
+      if admin_user?
+        flash[:info] = "Welcome Master!"
+      end
       redirect_to root_url
     else
       flash[:danger] = t("invalid_login")

@@ -18,11 +18,15 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="col-md-2">Request name </th>
-        <th class="col-md-2">User name</th>
-        <th class="col-md-2">Book name</th>
-        <th class="col-md-2">Borrow date</th>
-        <th class="col-md-2">Return date</th>
+        <th class="col-md-2 text-center">Request name </th>
+        <th class="col-md-1 text-center">Status</th>
+        <th class="col-md-2 text-center">User name</th>
+        <th class="col-md-2 text-center">Book name</th>
+        <th class="col-md-2 text-center">Borrow date</th>
+        <th class="col-md-2 text-center">Return date</th>
+        <% if logged_in? && admin_user? %>
+          <th class="col-md-2 text-center">Action </th>
+        <% end %>
       </tr>
     </thead>
 

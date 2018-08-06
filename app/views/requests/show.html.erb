@@ -4,9 +4,9 @@
   <div class="show_book_right">
     <p>User name :<%= link_to @user.name, @user %></p>
     <p>Description: <%= @book.description %></p>
-  <p><b>Borrow date: </b><%= I18n.l @request.borrow_date %></p>
-  <p><b>Return date: </b><%= I18n.l @request.return_date %></p>
-  <p><b>Status: </b><% if @request.status == 1 %>
+    <p><b>Borrow date: </b><%= I18n.l @request.borrow_date %></p>
+    <p><b>Return date: </b><%= I18n.l @request.return_date %></p>
+    <p><b>Status: </b><% if @request.status == 1 %>
        <span><b>Pending</b></span>
        <% elsif @request.status == 2 %>
        <span><b style="color:green">Confirmed, not reiceived yet</b></span>

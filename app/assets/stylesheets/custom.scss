@@ -367,18 +367,25 @@ footer ul li {
   width: 230px;
 }
 
+.search-for {
+  width: 320px;
+}
+
 .search1 {
-  float: right;
-  padding: 10px;
+  padding: 5px;
+  height: 30px;
+  margin-top:5px;
   font-size: 17px;
   border: 1px solid grey;
-  width: 80%;
+  width: 200px;
   background: #f1f1f1;
 }
 
 .search2 {
-  width: 20%;
-  padding: 10px;
+  height: 30px;
+  width: 65px;
+  padding:5px;
+  margin-top:0px;
   background: #2196F3;
   color: white;
   font-size: 17px;
@@ -425,103 +432,6 @@ footer ul li {
   }
   .store-filter .pull-right {
     margin-top: 15px;
-  }
-}
-
-@media only screen and (max-width: 991px) {
-  #header .nav-toggle {
-    display: inline-block;
-  }
-  header .pull-left, header .pull-right {
-    float: none !important;
-  }
-  header .pull-right {
-    margin-top: 10px;
-  }
-  #responsive-nav {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    max-width: 270px;
-    width: 0%;
-    overflow: hidden;
-    background-color: #FFF;
-    -webkit-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    transform: translateX(-100%);
-    -webkit-transition: 0.5s all;
-    transition: 0.5s all;
-    z-index: 990;
-  }
-  #responsive-nav.open {
-    width: 100%;
-    -webkit-transform: translateX(0%);
-    -ms-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-  #responsive-nav .dropdown .custom-menu {
-    display: none;
-    position: static;
-    width: 100%;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-top: none;
-    border-left: 2px solid #F8694A;
-  }
-  #responsive-nav .dropdown.open .custom-menu {
-    display: block;
-    min-width: auto;
-    -webkit-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-  }
-  .category-nav .category-list, .menu-nav .menu-list {
-    display: none;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: calc(100vh - 100px);
-  }
-  .category-nav .category-list.open, .menu-nav .menu-list.open {
-    display: block;
-  }
-  .menu-nav .menu-header, .category-nav .category-header {
-    cursor: pointer;
-  }
-  .category-nav {
-    float: none;
-    width: 100%;
-  }
-  .category-nav .category-list {
-    position: static;
-  }
-  .menu-nav .menu-header {
-    display: block;
-  }
-  .menu-nav .menu-list {
-    float: none;
-    border-left: 1px solid #DADADA;
-    border-right: 1px solid #DADADA;
-    border-bottom: 1px solid #DADADA;
-  }
-  .menu-nav .menu-list>li {
-    display: block;
-  }
-  .menu-nav .menu-list>li+li {
-    border-top: 1px solid #DADADA;
-  }
-  .menu-nav .menu-list>li>a {
-    color: #30323A;
-  }
-  #navigation.shadow:after {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 99;
   }
 }
 
@@ -889,12 +799,10 @@ footer ul li {
   background-color: #2e353d;
   position: fixed;
   top: 0px;
-  width: 300px;
   height: 100%;
   color: #e1ffff;
 }
 .nav-side-menu .brand {
-  background-color: #23282e;
   line-height: 50px;
   display: block;
   text-align: center;
@@ -1060,12 +968,6 @@ body {
   width: 60px;
 }
 
-.dropdown-submenu {
-    top: 0;
-    left: 100%;
-    margin-top: -1px;
-}
-
 .tree, .tree ul {
     margin:0;
     padding:0;
@@ -1128,4 +1030,76 @@ body {
     margin:0px 0px 0px 0px;
     padding:0px 0px 0px 0px;
     outline: 0;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+hr {
+  margin-top: 2px;
+  margin-bottom: 20px;
+  border-top: 2px solid #eeeeee;
+}
+
+.navbar-light {
+  border-radius: 0px;
+  background-color: #2e353d;
+}
+
+.status-text {
+  text-color: white;
+}
+
+.action {
+  cursor: pointer;
+}
+
+.trash {
+  font-size : 18px;
+  color: red;
 }

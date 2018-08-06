@@ -30,7 +30,7 @@ en:
   home: "Home"
   help: "Help"
   greeting: "Welcome to Thunder Library."
-  greeting2: "Join us to borrow thousands of books for free!"
+  greeting2: "Join us to get thousands of books for free!"
   category_deleted: "Category deleted"
   book_deleted: "Book deleted"
 
@@ -57,4 +57,4 @@ en:
 
   time:
     format:
-      long: "%m.%d.%Y %p"
+      long: "%d-%m-%y"

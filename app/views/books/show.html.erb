@@ -10,6 +10,7 @@
       <h5 class="product-price" style="color:red">Out of service</h5>
       <% else %>
       <h5 class="product-price"><b>Number of book:<%= @book.number %> left</h5></b></h4>
+      <% if logged_in? %>
       <p style="color: red"> Field with (*) must be exist</p>
       <%= form_for @request do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
@@ -23,6 +24,7 @@
             </div>
             <i><%= f.submit "Borrow this book", class: "btn btn-primary add-to-cart" %></i>
           <% end %>
+      <% end %>
       <% end %>
   </div>
   <div class="col-md-12">

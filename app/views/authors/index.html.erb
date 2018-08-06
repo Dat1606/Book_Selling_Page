@@ -1,13 +1,19 @@
-<ul class="users">
-  <h2> All authors</h2>
-  <ol class="micropos">
-    <% if admin_user? %>
-  <%= form_for @author do |f| %>
-  <%= f.text_field :name,  placeholder: "Create author", class: 'search1 form-control' %>
-  <%= f.submit "Create", class: "search2 btn btn-primary" %>
-  <% end %>
-  <% end %>
-<% if @authors.any? %>
-<b><%= render @authors %></b>
-<% end %>
-</ul>
+<h2 style="text-align: center">All Authors</h2>
+<div class="col-md-10 col-md-offset-1" style="border: 2px solid;">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-1">STT</th>
+        <th class="col-md-2">Author name</th>
+        <th class="col-md-3 text-center">Description</th>
+        <th class="col-md-2 text-center">Number of book</th>
+        <% if logged_in? && admin_user? %>
+        <th class="col-md-1"> Edit</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @authors %>
+    </tbody>
+  </table>
+</div>

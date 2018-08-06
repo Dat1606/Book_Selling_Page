@@ -1,9 +1,20 @@
-<li><b><%=link_to category.name, category_path(category) %></b>
-  <% if logged_in? %>
-  <% if admin_user? %>
+ <% if logged_in? && admin_user? %>
     <%#= link_to t("delete"), category, method: :delete, data: {confirm: t("are_you_sure")} %>
     <%#= link_to "Edit", edit_category_path(category.id) %>
-  <% end %>
-  <% end %>
+  <li><b><%= link_to category.name, category_url(category) %></b>
+  <hr>
   <ul><%= render  get_children(category.id) %></ul>
-</li>
+  </li>
+  <% else %>
+      <% if get_children(category.id).blank? %>
+      <li><%= link_to category.name, category_url(category) %></li>
+      <% else %>
+      <li class="dropdown-submenu">
+        <%= link_to category.name, category_url(category) %>
+        <ul class="dropdown-menu">
+        <li><%= render  get_children(category.id) %></li>
+        </ul>
+        </li>
+      <% end %>
+  <% end %>
+

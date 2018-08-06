@@ -1,5 +1,5 @@
 <% provide(:title, t("all_users")) %>
-  <% if admin_user? %>
+  <% if logged_in? && admin_user? %>
     <h1><%= link_to t("all_users"), users_path %></h1>
     <p><%= link_to '<button type="button" class="btn btn-primary" >Create new user</button>'.html_safe, signup_path %></p>
   <% end %>

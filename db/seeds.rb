@@ -22,7 +22,7 @@ end
 
 5.times do |n|
   name = Faker::Name.name
-  Author.create! name: name
+  Author.create! name: name, description: Faker::Lorem.sentence(15)
 end
 
 
