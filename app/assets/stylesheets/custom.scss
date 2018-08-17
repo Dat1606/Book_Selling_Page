@@ -34,11 +34,8 @@ textarea {
 #logo {
   float: left;
   margin-right: 5px;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
+  margin-left: 25px;
+  padding-top: 0px;
   font-weight: bold;
 }
 
@@ -118,6 +115,7 @@ input {
 }
 
 .book_content {
+  float: right;
 }
 .title {
   font-weight:bold;
@@ -349,22 +347,17 @@ footer ul li {
   float: right;
 }
 
-.list-group {
-  float: left;
-  padding-top: 20px;
-}
-
-.category_left {
-  float: left;
-  height: 1600px;
-}
 .book {
   padding-left: 0px;
 }
 
 .book_image {
   height: 270px;
-  width: 230px;
+  width: 200px;
+}
+
+.search-for {
+  width: 320px;
 }
 
 .search-for {
@@ -497,6 +490,7 @@ footer ul li {
 .product.product-single {
   margin-top: 15px;
   margin-bottom: 15px;
+  width: 200px;
   -webkit-transition: 0.3s all;
   transition: 0.3s all;
 }
@@ -773,14 +767,22 @@ footer ul li {
   color: #FFF;
   background-color: #30323A;
 }
+.modal-body {
+height: 60px;
+}
+
+.create-book-modal-body{
+padding-bottom: 20px;
+}
 
 .modal-body-left {
-  width: 50%;
+  width: 47%;
   float: left;
 }
 .modal-body-right {
-  width: 50%;
+  width: 47%;
   float: right;
+  margin-bottom: 10px;
   padding-right: 0px;
 }
 
@@ -821,14 +823,14 @@ footer ul li {
   /*
     .collapsed{
        .arrow:before{
-                 font-family: FontAwesome;
-                 content: "\f053";
-                 display: inline-block;
-                 padding-left:10px;
-                 padding-right: 10px;
-                 vertical-align: middle;
-                 float:right;
-            }
+         font-family: FontAwesome;
+         content: "\f053";
+         display: inline-block;
+         padding-left:10px;
+         padding-right: 10px;
+         vertical-align: middle;
+         float:right;
+        }
      }
 */
 }
@@ -954,13 +956,13 @@ body {
 }
 
 .book_show_image {
+  margin-top: 20px;
   height : 500px;
-  width: 40%;
+  width: 400px;
+  float: left;
 }
 
 .show_info_book {
-  width: 50%;
-  float: right;
 }
 
 .img_preview {

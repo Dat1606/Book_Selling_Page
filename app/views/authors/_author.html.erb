@@ -5,7 +5,7 @@
   <td class="text-center"><b><%= link_to Book.where(author_id: author.id).count, author %></b></td>
   <% if logged_in? %>
   <% if admin_user? %>
-    <td><%= link_to t("delete"), author, method: :delete, data: {confirm: t("are_you_sure")} %></td>
+       <td><%= link_to "", author, method: :delete, data: {confirm: t("are_you_sure")}, class: "trash glyphicon glyphicon-trash" %></td>
   <% end %>
   <% end %>
 </tr>

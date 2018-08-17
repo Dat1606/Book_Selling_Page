@@ -1,6 +1,5 @@
 class PublishersController < ApplicationController
    before_action :load_request, :find_category
-   before_action :logged_in_user
 
   def show
     @publisher = Publisher.find_by id: params[:id]
@@ -40,5 +39,6 @@ class PublishersController < ApplicationController
 
   def find_category
     @categories = Category.all
+    @user = User.new
   end
 end

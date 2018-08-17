@@ -1,8 +1,9 @@
- <% if @books.blank? %>
+<div class="container">
+  <% if @books.blank? %>
     <h4>There are no books containing the term "<%= params[:search] %>".</h4>
   <% end %>
 <% if @books.any? %>
-<%= render @books %>
-<%= paginate @books %>
+  <%= render @books %>
+  <%= paginate @books %>
 <% end %>
-
+</div>

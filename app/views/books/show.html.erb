@@ -1,5 +1,6 @@
+<div class="container">
  <%= image_tag @book.picture.url, class: "book_show_image" %>
-  <div class="show_info_book">
+  <div class="show_info_book col-md-6">
     <h2><%= @book.name %></h2>
     <br></br>
     <h4><b>Category: <%= link_to @book.category.name, category_path(@book.category) %></b></h4>
@@ -26,6 +27,9 @@
           <% end %>
       <% end %>
       <% end %>
+      <% unless logged_in? %>
+          <h4 style="font-weight: bold"> Please <button class="primary-btn " data-toggle="modal" data-dismiss="modal" data-target="#login" style="margin-left:5px;"> Log in</button> or <button class="primary-btn " data-toggle="modal" data-dismiss="modal" data-target="#signup" style="margin-left:5px;"> Sign up</button> to get this book</h4>
+          <% end %>
   </div>
   <div class="col-md-12">
   <div class="section-title">
@@ -40,4 +44,4 @@
     <%= render @books.limit(4) %>
   <% end %>
 </div>
-
+</div>

@@ -5,7 +5,6 @@ class Book < ApplicationRecord
   belongs_to :author
   has_many :comments
   mount_uploader :picture, PictureUploader
-  default_scope -> {order(created_at: :desc)}
   has_many :requests, dependent: :destroy
   has_many :passive_likes, class_name:  Like.name,
     foreign_key: "book_id", dependent: :destroy
@@ -21,6 +20,7 @@ class Book < ApplicationRecord
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
 
   scope :search, ->q{where "name LIKE \'%#{q}%\'"}
+  scope :order_by_id, -> {order(created_at: :desc)}
    private
 
     # Validates the size of an uploaded picture.

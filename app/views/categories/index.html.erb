@@ -1,9 +1,9 @@
-  <h2>Categories</h2>
+    <h2>Categories</h2>
         <div class="col-md-4">
             <ul id="tree1">
                 <li><a href="#">Categories</a>
                     <ul>
-                        <%= render @categories1 %>
+                        <%= render partial: "categories/tree", collection: @categories1, as: :category %>
                     </ul>
                 </li>
             </ul>

@@ -1,0 +1,92 @@
+<tr>
+  <td class= "text-center"><%=link_to ("Request " + request.id.to_s), request_path(request.id) %></td>
+  <% if request.status == 1 %>
+    <td class="category text-center"><div class="status-text" style="background-color:pink">Pending </div></td>
+  <% elsif request.status == 2 %>
+    <td class="category text-center"><div style="color:#2ECC71">Accepted</div></td>
+  <% elsif request.status == 3 %>
+    <td class="category text-center"><div style="color:blue">Received</div></td>
+  <% elsif request.status == 4 %>
+    <td class="category text-center"><div style="color:red">Rejected</div></td>
+  <% elsif request.status == 5 %>
+    <td class="category text-center"><div style="color:green">Returned</div></td>
+  <% end %>
+    <td class="text-center"><%= link_to request.user.name, user_path(request.user) %></td>
+    <td class="text-center"><b><%= link_to request.book.name, category_book_path(request.book.category_id, request.book) %></b></td>
+    <td class="text-center"><%=  request.borrow_date.strftime("%d-%m-%Y") %></td>
+    <td class="text-center"><%= request.return_date.strftime("%d-%m-%Y") %></td>
+    <% if logged_in? && admin_user? %>
+      <td class="text-center"><i title="Take action" class="fa fa-check-square-o" data-toggle="modal" style="color:blue; font-size: 20px; cursor: pointer;" data-target="#myModal-<%= request.id %>"></i> <%= link_to "",request_path(request), class: "trash glyphicon glyphicon-trash", method: :delete, data: {confirm: t("are_you_sure")} %></td>
+      <% end %>
+</tr>
+
+<!-- The Modal -->
+<div class="modal" id="myModal-<%= request.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%=link_to ("Request " + request.id.to_s), request_path(request.id) %></h4>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <div class="modal-body-left">
+             <%= image_tag request.book.picture.url , class: "book_image_1" %>
+          </div>
+           <div class ="modal-body-right">
+              <% if logged_in? %>
+              <p>User name :<%= link_to request.user.name, user_path(request.user) %></p>
+              <p><b>Borrow date: </b><%=  request.borrow_date.strftime("%d-%m-%Y") %></p>
+              <p><b>Return date: </b><%=  request.return_date.strftime("%d-%m-%Y") %></p>
+              <p><b>Status: </b><% if request.status == 1 %>
+                 <span><b>Pending</b></span>
+                 <% elsif request.status == 2 %>
+                 <span><b style="color:green">Confirmed, not reiceived yet</b></span>
+                 <% elsif request.status == 3 %>
+                 <span><b style="color:blue"> Received, not returned yet</b> </span>
+                 <% elsif request.status == 4 %>
+                 <span><b style="color:red"> Rejected</b></span>
+                 <% elsif request.status == 5 %>
+                 <span><b style="color:green"> Returned </b></span>
+                 <% end %></p>
+            <% if logged_in? && admin_user? && request.status == 1 && request.book.number > 0 %>
+              <%= form_for [:admin,request] do |f| %>
+                <%= f.hidden_field :status, value: 2 %>
+                <%= f.hidden_field :book_id, value: request.book.id %>
+                <%= f.submit "Accept this request", class: "btn btn-primary" %>
+              <% end %>
+                <p></p>
+              <%= form_for [:admin,request]  do |f| %>
+                <%= f.hidden_field :status, value: 4 %>
+                <%= f.submit "Reject this request", class: "btn btn-primary" %>
+              <% end %>
+            <% end %>
+            <% end %>
+
+            <% if logged_in? && admin_user? && request.status == 2 %>
+              <%= form_for [:admin,request]  do |f| %>
+                <%= f.hidden_field :status, value: 3 %>
+                <%= f.submit "Confirm Reiceive", class: "btn btn-primary" %>
+              <% end %>
+              <% end %>
+
+              <% if logged_in? && admin_user? && request.status == 3 %>
+              <%= form_for [:admin,request]  do |f| %>
+                <%= f.hidden_field :status, value: 5 %>
+                <%= f.submit "Confirm Returned", class: "btn btn-primary" %>
+              <% end %>
+              <% end %>
+           </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Close</button>
+      </div>
+
+  </div>
+  </div>
+</div>

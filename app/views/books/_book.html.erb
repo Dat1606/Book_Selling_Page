@@ -21,12 +21,6 @@
       </div>
       <p ><span class="like_count<%= book.id %>"><%= book.book_likes.count %></span> <i class="fa fa-heart" style="color:red"></i></p>
       <h2 class="product-name"><a href="#"><%= link_to book.name, category_book_path(book.category, book) %></a></h2>
-      <% if logged_in? %>
-      <% if admin_user? %>
-      <span><%= link_to "edit", edit_category_book_path(book.category, book) %></span>
-       <span class="delete"><%= link_to t("delete"), category_book_path(book.category, book), method: :delete, data: {confirm: t("are_you_sure")} %></span>
-       <% end %>
-       <% end %>
       <div class="product-btns" style="float:bottom">
         <%= render "books/like_form", book: book %>
           <span><button class="primary-btn add-to-cart" data-toggle="modal" data-target="#myModal-<%= book.id %>" style="margin-left:5px;"><i class="fa fa-shopping-cart"></i> Borrow</button></span>

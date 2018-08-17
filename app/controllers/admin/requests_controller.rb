@@ -1,4 +1,4 @@
-class RequestsController < ApplicationController
+class Admin::RequestsController < ApplicationController
    before_action :logged_in_user
    before_action :find_book, only: %i(create)
    before_action :load_request
@@ -44,13 +44,12 @@ class RequestsController < ApplicationController
     else
       flash[:info] = "Cannot accept request, we've currently ran out of this book"
     end
-      redirect_to requests_url
+      redirect_to admin_requests_url
   end
 
   def index
     if logged_in?
       @request = Request.find_by(id: params[:id])
-      #@book = Book.find_by(id: @request.book_id)
       @requests = current_user.find_requests
       if admin_user?
         @requests = Request.all
@@ -59,52 +58,11 @@ class RequestsController < ApplicationController
         @requests = @requests.where status: params[:requests]
         respond_to :js
         if params[:requests] == "0"
-        @requests = current_user.find_requests
-        @requests = Request.all if admin_user?
-        respond_to :js
+          @requests = Request.all
+          respond_to :js
         end
       end
     end
-  end
-
-  def incoming_requests
-    @requests = current_user.find_requests
-      if admin_user?
-        @requests = Request.all
-      end
-    @incoming_requests = @requests.where(status: 1).order(:id).page params[:page]
-  end
-
-  def confirmed_requests
-    @requests = current_user.find_requests
-      if admin_user?
-        @requests = Request.all
-      end
-    @confirmed_requests = (@requests.where(status: 2 )).order(:id).page params[:page]
-  end
-
-  def received_requests
-    @requests = current_user.find_requests
-      if admin_user?
-        @requests = Request.all
-      end
-    @received_requests =  (@requests.where(status: 3 )).order(:id).page params[:page]
-  end
-
-  def returned_requests
-    @requests = current_user.find_requests
-      if admin_user?
-        @requests = Request.all
-      end
-    @returned_requests =  (@requests.where(status: 5 )).order(:id).page params[:page]
-  end
-
-  def rejected_requests
-   @requests = current_user.find_requests
-      if admin_user?
-        @requests = Request.all
-      end
-    @rejected_requests = @requests.where(status: 4).order(:id).page params[:page]
   end
 
   def destroy

@@ -6,25 +6,21 @@ Rails.application.routes.draw do
     end
   end
   resources :categories do
-    resources :books do
-      resources :comments
+    resources :books, only: [:show, :index] do
+      resources :comments, only: [:create, :destroy]
     end
+  end
+  namespace :admin do
+    resources :books, except: [:new, :edit]
+    resources :requests
+    get "/",     to: "sessions#new"
+    post "/login",    to: "sessions#create"
   end
   resources :authors
   resources :publishers
-  resources :requests do
-    collection do
-      get :incoming_requests
-      get :confirmed_requests
-      get :received_requests
-      get :returned_requests
-      get :rejected_requests
-    end
-  end
-  resources :likes
+  resources :requests
+  resources :likes, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :searches
-  resources :general_categories
   get "users/new"
   root "static_pages#home"
   get "/signup",  to: "users#new"

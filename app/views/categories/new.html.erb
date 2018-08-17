@@ -3,7 +3,7 @@
     <ul id="tree1">
         <li><a href="#">Categories</a>
             <ul>
-                <%= render @categories1 %>
+                 <%= render partial: "categories/tree", collection: @categories1, as: :category %>
             </ul>
         </li>
     </ul>
@@ -13,7 +13,7 @@
 <% end %>
 <%= render "categories/tree_view" %>
 
-<div class="col-md-6" style="float:right">
+<div class="col-md-6">
   <% if admin_user? %>
     <h1>Create a sub category</h1>
     <%= form_for @category do |f| %>

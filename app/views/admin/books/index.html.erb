@@ -1,0 +1,75 @@
+<div class="col-md-10 col-md-offset-1" style="border: solid 1px grey; margin-top:3px;">
+  <button class="btn btn-success" data-toggle="modal" data-target="#myModal" style="float: right; margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i>Create a new book</button>
+<table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th class="col-md-1 text-center">STT</th>
+        <th class="col-md-2 text-center">Book Name</th>
+        <th class="col-md-2 text-center">Description</th>
+        <th class="col-md-1 text-center">Like number</th>
+        <th class="col-md-2 text-center">Category</th>
+        <% if logged_in? && admin_user? %>
+          <th class="col-md-2 text-center">Action </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody id="requests-table">
+      <%= render @books %>
+    </tbody>
+  </table>
+    <%= paginate @books %>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h1 style="text-align: center; color:blue; font-weight: bold"> Create new book </h1>
+      </div>
+
+      <!-- Modal body -->
+      <div class="create-book-modal-body">
+        <% if admin_user? %>
+          <p style="color:red"> Field with (*) are required </p>
+          <%= form_for [:admin, @new_book] do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="modal-body-left" style="margin-right: 5px;">
+            <%= f.hidden_field :user_id, value: current_user.id %>
+             <p><b><span style="color:red">*</span>Set book name </b></p>
+            <%= f.text_field :name, placeholder: "Set book name...", class: "form-control" %>
+            <p><b><span style="color:red">*</span>Set number </b></p>
+            <%= f.text_field :number,placeholder: "Set number of books...", class: "form-control"  %>
+            <span class="picture">
+            <p><b><span style="color:red">*</span>Upload a picture </b></p>
+            <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "form-control" %>
+            </span>
+          </div>
+            <div class="modal-body-right">
+            <p><b><span style="color:red">*</span>Choose category </b></p>
+            <%= f.collection_select :category_id, Category.order(:name),:id,:name, {},class: "form-control"  %>
+            <p><b><span style="color:red">*</span>Choose Author </b></p>
+            <%= f.collection_select :author_id, Author.order(:name),:id,:name, {},class: "form-control"  %>
+            <p><b><span style="color:red">*</span>Choose Publisher </b></p>
+            <%= f.collection_select :publisher_id, Publisher.order(:name),:id,:name,  {}, class: "form-control"  %>
+            </div>
+            <%= f.label :Write_a_description %>
+            <%= f.text_area :description, placehoder: "Write a description", class: "form-control" %>
+          <%= f.submit "Create book", class: "btn btn-primary" %>
+        <% end %>
+        <% end %>
+        <script type="text/javascript">
+          $('#micropost_picture').bind('change', function() {
+            var size_in_megabytes = this.files[0].size/1024/1024;
+            if (size_in_megabytes > 5) {
+              alert('Maximum file size is 5MB. Please choose a smaller file.');
+            }
+          });
+        </script>
+      </div>
+
+  </div>
+  </div>
+</div>

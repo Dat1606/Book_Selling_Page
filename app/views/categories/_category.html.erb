@@ -1,20 +1,13 @@
- <% if logged_in? && admin_user? %>
-    <%#= link_to t("delete"), category, method: :delete, data: {confirm: t("are_you_sure")} %>
-    <%#= link_to "Edit", edit_category_path(category.id) %>
-  <li><b><%= link_to category.name, category_url(category) %></b>
-  <hr>
-  <ul><%= render  get_children(category.id) %></ul>
+<%#= link_to t("delete"), category, method: :delete, data: {confirm: t("are_you_sure")} %>
+<%#= link_to "Edit", edit_category_path(category.id) %>
+<% if get_children(category.id).blank? %>
+  <li class="each-category list-group-item"  title="<%= category.name %>"><%= link_to truncate(category.name, length:20), category_url(category) %></li>
+<% else %>
+  <li class="dropdown-submenu each-category list-group-item" >
+  <%= link_to truncate(category.name, length:20), category_url(category) %>
+  <ul class="dropdown-menu each-category">
+    <li><%= render  get_children(category.id) %></li>
+  </ul>
   </li>
-  <% else %>
-      <% if get_children(category.id).blank? %>
-      <li><%= link_to category.name, category_url(category) %></li>
-      <% else %>
-      <li class="dropdown-submenu">
-        <%= link_to category.name, category_url(category) %>
-        <ul class="dropdown-menu">
-        <li><%= render  get_children(category.id) %></li>
-        </ul>
-        </li>
-      <% end %>
-  <% end %>
+<% end %>
 
