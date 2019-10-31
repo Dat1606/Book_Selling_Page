@@ -1,6 +1,6 @@
 <tr>
   <td class= "text-center"><%= book.id.to_s %></td>
-  <td class= "text-center"><%=link_to book.name, category_book_path(book.category, book) %></td>
+  <td class= "text-center" style="font-weight: bold"><%= book.name%> </td>
   <td class= "text-center"><%= truncate(book.description, length: 30) %></td>
   <td class= "text-center"><%= book.book_likes.count %></td>
   <td class= "text-center"><%= link_to book.category.name, category_path(book.category) %></td>

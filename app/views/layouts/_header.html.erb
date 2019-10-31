@@ -21,7 +21,7 @@
           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
           <li class="divider"></li>
           <li>
-            <%= link_to "Log out", logout_path, method: :delete %>
+            <%= link_to t("log_out"), logout_path, method: :delete %>
           </li>
         </ul>
       </li>
@@ -91,25 +91,25 @@
       <!-- Modal body -->
       <div class="modal-body">
         <h1 align="center" style="color: #3498DB"><b><i>Log in</i></b></h1>
-              <div class="col-md-6 col-md-offset-3">
-        <%= form_for(:session, url: login_path) do |f| %>
+        <div class="col-md-6 col-md-offset-3">
+          <%= form_for(:session, url: login_path) do |f| %>
 
-        <%= f.label :email %>
-        <%= f.email_field :email, class: "form-control" %>
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control" %>
+          <%= f.label :password %>
+          <%= f.password_field :password, class: "form-control" %>
 
-        <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span><%= t "remember_password" %></span>
-        <% end %>
+          <%= f.label :remember_me, class: "checkbox inline" do %>
+          <%= f.check_box :remember_me %>
+          <span><%= t "remember_password" %></span>
+          <% end %>
 
-        <%= f.submit t("log_in"), class: "btn btn-primary" %>
-        <% end %>
-        <p></p>
-        <p><%= t("new_user") %><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#signup" style="margin-left:5px;"> Sign up now</a></p>
-      </div>
+          <%= f.submit t("log_in"), class: "btn btn-primary" %>
+          <% end %>
+          <p></p>
+          <p><%= t("new_user") %><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#signup" style="margin-left:5px;"><%= t "sign_up_now" %></a></p>
+        </div>
       </div>
 
       <!-- Modal footer -->

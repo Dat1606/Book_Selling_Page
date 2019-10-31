@@ -1,0 +1,54 @@
+<div class="col-md-10 col-md-offset-1" style="border: solid 1px grey; margin-top:3px;">
+<h1><%= @category.name %><span> <i title="Edit" class="fa fa-edit" data-toggle="modal" style="color:blue; font-size: 30px; cursor: pointer;" data-target="#myModal"></i>  <%= link_to "",admin_category_path(@category), class: "trash glyphicon glyphicon-trash", method: :delete, data: {confirm: t("are_you_sure")} %></span></h1>
+<table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th class="col-md-1 text-center">STT</th>
+        <th class="col-md-2 text-center">Book Name</th>
+        <th class="col-md-2 text-center">Description</th>
+        <th class="col-md-1 text-center">Like number</th>
+        <th class="col-md-2 text-center">Category</th>
+        <% if logged_in? && admin_user? %>
+          <th class="col-md-2 text-center">Action </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody id="requests-table">
+      <%= render @books if @books.any? %>
+    </tbody>
+  </table>
+    <%= paginate @books %>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= @category.name %></h4>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h2>Edit category </h2>
+        <%= form_for [:admin, @category] do |f| %>
+        <%= f.label :Choose_Parent_Category %>
+        <%= f.collection_select :parent_id, @valid_categories,:id,:name, {},class: "form-control"  %>
+        <%= f.label :Set_Category_name %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Close</button>
+      </div>
+
+  </div>
+  </div>
+</div>

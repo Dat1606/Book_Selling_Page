@@ -20,7 +20,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-
     @category = Category.find_by id: params[:id]
     @book = Book.new
     @books = Book.where(category_id: params[:id]).order(:id).page params[:page]
@@ -28,16 +27,6 @@ class CategoriesController < ApplicationController
       @books = @books.search(params[:search]).order(:name).page params[:page]
     else
       @books = @books.order(:name).page params[:page]
-    end
-  end
-
-  def edit
-    @categories1 = Category.where(parent_id: 1)
-    @category = Category.find_by id: params[:id]
-    @valid_categories = Category.where("parent_id != ?",@category.id )
-    unless @category
-      flash[:danger] = "Category not found"
-      redirect_back(fallback_location: root_url)
     end
   end
 

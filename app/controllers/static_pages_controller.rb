@@ -4,8 +4,6 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @feed_items = current_user.feed.order(:name).page params[:page]
-      # @category = Category.new
-      #@book   = Book.new
       @like = Like.new
       @request = Request.new
     end

@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def find_category
-    # byebug
-    # @categories = Category.all
     @user =User.new
     @categories = Category.where(parent_id: 1)
   end
