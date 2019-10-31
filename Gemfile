@@ -19,7 +19,7 @@ gem "uglifier", ">= 1.3.0"
 gem "kaminari"
 gem "font-awesome-rails"
 gem 'carrierwave',     '1.2.2'
-gem 'mini_magick',     '4.7.0'
+gem 'mini_magick',     '4.9.4'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-ui-rails'
 
